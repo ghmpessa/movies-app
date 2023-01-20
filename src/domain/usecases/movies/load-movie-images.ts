@@ -1,7 +1,7 @@
 import { Image } from '@/domain/model'
 
 export interface LoadMovieImages {
-  load(params: LoadMovieImages.Params): Promise<LoadMovieImages.Model>
+  load(): Promise<LoadMovieImages.Model>
 }
 
 export namespace LoadMovieImages {
@@ -9,8 +9,5 @@ export namespace LoadMovieImages {
     id: number
     backdrops: Array<Image.Model>
     posters: Array<Image.Model>
-  }
-  export type Params = {
-    movie_id: number
   }
 }
