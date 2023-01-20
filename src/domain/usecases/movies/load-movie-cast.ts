@@ -1,4 +1,4 @@
-import { Cast } from '../model'
+import { Cast } from '../../model'
 
 export interface LoadMovieCast {
   load(params: LoadMovieCast.Params): Promise<LoadMovieCast.Model>
