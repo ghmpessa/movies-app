@@ -14,7 +14,8 @@ export type HttpMethod = 'post' | 'get'
 
 export enum HttpStatusCode {
   ok = 200,
-  unauthorized = 401, 
+  noContent = 201,
+  unauthorized = 401,
   notFound = 404,
 }
 
