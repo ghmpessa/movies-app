@@ -3,8 +3,11 @@ import axios, { AxiosResponse } from 'axios'
 
 export class AxiosHttpClient {
   async request(data: HttpRequest): Promise<HttpResponse> {
-    const { url, method, body, headers, params } = data
+    const API_KEY = import.meta.env.VITE_API_KEY
+    const { url: path, method, body, headers, params } = data
     let axiosResponse: AxiosResponse
+
+    const url = `${path}?${API_KEY}`
 
     try {
       axiosResponse = await axios.request({
