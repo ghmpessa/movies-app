@@ -1,6 +1,8 @@
 export { default as Fab } from './fab'
 export { default as Footer } from './footer'
+export { default as Error } from './error'
 export { default as Header } from './header'
 export { default as Loading } from './loading'
 export { default as MainContainer } from './main-container'
 export { default as MovieCard } from './movie-card'
+export { default as MovieList } from './movie-list'
