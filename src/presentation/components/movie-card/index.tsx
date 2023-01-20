@@ -1,6 +1,7 @@
-import { format, parse } from 'date-fns'
 import React from 'react'
 import { MovieCardStyles as Styled } from './styles'
+
+import { format } from 'date-fns'
 
 const example = {
   title: 'The Chronicles of Narnia: The Lion, the Witch and the Wardrobe',
@@ -27,6 +28,7 @@ const MovieCard: React.FC = () => {
     new Date([month, day, year].join('-')),
     'MMMM dd, yyyy'
   )
+
   return (
     <Styled.Container>
       <Styled.Image src={`${urlPrefix}${example.poster_path}`} />
