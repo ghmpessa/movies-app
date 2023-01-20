@@ -1,5 +1,9 @@
 export interface DeleteRating {
-  MethodName(): Promise<void>
+  delete(): Promise<DeleteRating.Model>
 }
 
-export namespace DeleteRating {}
+export namespace DeleteRating {
+  export type Model = {
+    success: boolean
+  }
+}
