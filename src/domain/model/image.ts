@@ -1,4 +1,4 @@
-export namespace Photo {
+export namespace Image {
   export type Model = {
     aspect_ratio: number
     file_path: string
