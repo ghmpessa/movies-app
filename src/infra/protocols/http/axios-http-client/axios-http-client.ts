@@ -1,7 +1,7 @@
-import { HttpRequest, HttpResponse } from '@/data/protocols/http'
+import { HttpClient, HttpRequest, HttpResponse } from '@/data/protocols/http'
 import axios, { AxiosResponse } from 'axios'
 
-export class AxiosHttpClient {
+export class AxiosHttpClient implements HttpClient {
   async request(data: HttpRequest): Promise<HttpResponse> {
     const API_KEY = import.meta.env.VITE_API_KEY
     const { url: path, method, body, headers, params } = data
