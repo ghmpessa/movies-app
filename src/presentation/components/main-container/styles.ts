@@ -11,6 +11,6 @@ export namespace MainContainerStyles {
     align-items: center;
     justify-content: center;
     background-color: ${({ theme }) => theme.palette.background.default};
-    padding: 0px calc((100% - 1300px) / 2);
+    padding: 0px calc((100% - 1500px) / 2);
   `
 }

@@ -13,7 +13,7 @@ export namespace HeaderStyles {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px calc((100% - 1300px) / 2);
+    padding: 0px calc((100% - 1500px) / 2);
 
     background-color: ${({ theme: { palette } }) => palette.background.paper};
     box-shadow: 0px 2px 2px rgba(31, 0, 2, 0.25);
@@ -23,10 +23,11 @@ export namespace HeaderStyles {
 
   export const LogoContainer = styled('div')`
     height: ${Height * 0.6}px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
+    margin-left: 1.5rem;
 
     a {
       font-weight: 600;
@@ -35,12 +36,26 @@ export namespace HeaderStyles {
       text-decoration: none;
       color: white;
     }
+
+    &::before {
+      content: '';
+      height: 30px;
+      position: absolute;
+      width: 10px;
+      top: 6px;
+      z-index: -1;
+      left: 5px;
+      background-color: ${({ theme }) => theme.palette.primary.main};
+
+      transform: rotate(-45deg);
+    }
   `
 
   export const NavContainer = styled('nav')`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-right: 1.5rem;
   `
 
   export const NavLinkContainer = styled('a')`
@@ -51,6 +66,11 @@ export namespace HeaderStyles {
     margin: 0 10px;
     position: relative;
     text-decoration: none;
+
+    &.last {
+      margin-right: 0;
+      padding-right: 0;
+    }
 
     &::after {
       position: absolute;

@@ -15,7 +15,7 @@ const Header: React.FC = () => {
           <LocalMoviesRoundedIcon sx={{ color: 'white' }} />
           <Styled.NavLink>Movies</Styled.NavLink>
         </Styled.NavLinkContainer>
-        <Styled.NavLinkContainer href='#'>
+        <Styled.NavLinkContainer href='#' className='last'>
           <BookmarkIcon sx={{ color: 'white' }} />
           <Styled.NavLink>Watch List</Styled.NavLink>
         </Styled.NavLinkContainer>
