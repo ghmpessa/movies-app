@@ -15,4 +15,9 @@ export namespace Movie {
     video?: boolean
     vote_average?: number
   }
+
+  export type ShortModel = Pick<
+    Movie.Model,
+    'id' | 'title' | 'poster_path' | 'release_date' | 'vote_average'
+  >
 }
