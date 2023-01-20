@@ -1,7 +1,7 @@
 import { Movie } from '@/domain/model'
 
 export interface LoadMovies {
-  load(): Promise<LoadMovies.Model>
+  load(params?: LoadMovies.Params): Promise<LoadMovies.Model>
 }
 
 export namespace LoadMovies {
@@ -10,5 +10,9 @@ export namespace LoadMovies {
     page: number
     total_pages: number
     total_results: number
+  }
+
+  export type Params = {
+    page?: number
   }
 }

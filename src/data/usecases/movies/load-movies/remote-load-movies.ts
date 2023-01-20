@@ -7,10 +7,11 @@ export class RemoteLoadMovies implements LoadMovies {
     private readonly httpClient: HttpClient<LoadMovies.Model>
   ) {}
 
-  async load(): Promise<LoadMovies.Model> {
+  async load(params: LoadMovies.Params): Promise<LoadMovies.Model> {
     const httpResponse = await this.httpClient.request({
       url: this.url,
       method: 'get',
+      params,
     })
 
     if (httpResponse.statusCode !== Http.StatusCode.ok)
