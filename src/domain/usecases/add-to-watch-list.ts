@@ -1,5 +1,5 @@
 export interface AddToWatchList {
-  Add(params: AddToWatchList.Params): Promise<void>
+  add(params: AddToWatchList.Params): Promise<void>
 }
 
 export namespace AddToWatchList {
