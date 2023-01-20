@@ -11,11 +11,7 @@ const example = {
 }
 
 const MovieCard: React.FC = () => {
-  const urlPrefix = 'http://image.tmdb.org/t/p/w500'
-
-  const day = example.release_date.slice(8)
-  const month = example.release_date.slice(5, 7)
-  const year = example.release_date.slice(0, 4)
+  const urlPrefix = 'https://image.tmdb.org/t/p/w500'
 
   const rate =
     example.vote_average < 3
@@ -23,6 +19,10 @@ const MovieCard: React.FC = () => {
       : example.vote_average < 7
       ? 'yellow'
       : 'green'
+
+  const day = example.release_date.slice(8)
+  const month = example.release_date.slice(5, 7)
+  const year = example.release_date.slice(0, 4)
 
   const releaseDate = format(
     new Date([month, day, year].join('-')),
