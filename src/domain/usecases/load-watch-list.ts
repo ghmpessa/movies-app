@@ -1,4 +1,4 @@
-import { Movie } from '../model'
+import { Movie } from '@/domain/model'
 
 export interface LoadWatchList {
   load(params: LoadWatchList.Params): Promise<LoadWatchList.Model>
