@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "npm test -- --watch",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "typecheck": "tsc",
@@ -20,8 +22,6 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-prettier": "^4.2.1",
     "git-commit-msg-linter": "^4.5.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
