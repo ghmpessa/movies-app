@@ -17,6 +17,8 @@ export namespace HeaderStyles {
 
     background-color: ${({ theme: { palette } }) => palette.background.paper};
     box-shadow: 0px 2px 2px rgba(31, 0, 2, 0.25);
+
+    z-index: 10000;
   `
 
   export const LogoContainer = styled('div')`
