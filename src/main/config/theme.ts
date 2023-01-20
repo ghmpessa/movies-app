@@ -11,6 +11,8 @@ export const theme = createTheme({
     },
     secondary: {
       main: '#949494',
+      dark: '#676767',
+      light: '#ABABAB',
     },
     background: {
       default: '#171717',
@@ -19,7 +21,7 @@ export const theme = createTheme({
     text: {},
   },
   typography: {
-    fontFamily: '"Poppins", "Roboto", "Helvetica", sans-serif',
+    fontFamily: '"Poppins", "Raleway" ,"Roboto", "Helvetica", sans-serif',
     fontSize: 14,
     fontWeightLight: 200,
     fontWeightRegular: 400,
