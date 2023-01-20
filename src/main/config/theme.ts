@@ -19,10 +19,11 @@ export const theme = createTheme({
     text: {},
   },
   typography: {
-    // fontFamily: '"Lato", "Roboto", "Helvetica", sans-serif',
+    fontFamily: '"Poppins", "Roboto", "Helvetica", sans-serif',
     fontSize: 14,
     fontWeightLight: 200,
     fontWeightRegular: 400,
+    fontWeightMedium: 500,
     fontWeightBold: 700,
 
     button: {
