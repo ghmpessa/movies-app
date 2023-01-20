@@ -6,7 +6,7 @@ export interface LoadMovies {
 
 export namespace LoadMovies {
   export type Model = {
-    results: Movie.Model[]
+    results: Array<Movie.Model>
     page: number
     total_pages: number
     total_results: number
