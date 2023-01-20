@@ -2,7 +2,7 @@ import React from 'react'
 import { HeaderStyles as Styled } from './styles'
 
 import BookmarkIcon from '@mui/icons-material/Bookmark'
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies'
+import LocalMoviesRoundedIcon from '@mui/icons-material/LocalMoviesRounded'
 
 const Header: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const Header: React.FC = () => {
       </Styled.LogoContainer>
       <Styled.NavContainer>
         <Styled.NavLinkContainer href='#'>
-          <LocalMoviesIcon sx={{ color: 'white' }} />
+          <LocalMoviesRoundedIcon sx={{ color: 'white' }} />
           <Styled.NavLink>Movies</Styled.NavLink>
         </Styled.NavLinkContainer>
         <Styled.NavLinkContainer href='#'>
