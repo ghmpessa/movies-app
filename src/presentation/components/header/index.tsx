@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HeaderStyles as Styled } from './styles'
 
 import { useAppContext } from '@/presentation/contexts'
@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({
     setCurrentAccount,
   } = useAppContext()
 
-  const accountId = getCurrentAccount?.().id
+  const [ísLogged, setIsLogged] = useState(getCurrentSession?.() ? true : false)
 
   const handleRequest = async () => {
     try {
@@ -76,6 +76,7 @@ const Header: React.FC<Props> = ({
       await deleteSession.delete({ session_id })
       setCurrentSession?.(null)
       setCurrentAccount?.(null)
+      setIsLogged(false)
     } catch (error) {
       console.log(error)
     }
@@ -106,9 +107,11 @@ const Header: React.FC<Props> = ({
           <LocalMoviesRoundedIcon sx={{ color: 'white' }} />
           <Styled.NavLink>Movies</Styled.NavLink>
         </Styled.NavLinkContainer>
-        {getCurrentSession?.() ? (
+        {ísLogged ? (
           <>
-            <Styled.NavLinkContainer to={`${accountId}/watch-list`}>
+            <Styled.NavLinkContainer
+              to={`${getCurrentAccount?.().id}/watch-list`}
+            >
               <BookmarkIcon sx={{ color: 'white' }} />
               <Styled.NavLink>Watch List</Styled.NavLink>
             </Styled.NavLinkContainer>

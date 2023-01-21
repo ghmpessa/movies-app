@@ -28,7 +28,7 @@ export namespace HeaderStyles {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 1.5rem;
+    margin-left: 1.8rem;
 
     a {
       font-weight: 600;
@@ -56,7 +56,6 @@ export namespace HeaderStyles {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 1.5rem;
   `
 
   export const NavLinkContainer = styled(Link)`
@@ -64,12 +63,11 @@ export namespace HeaderStyles {
     align-items: center;
     justify-content: center;
     padding: 10px 0px;
-    margin: 0 20px;
+    margin: 0 1.8rem;
     position: relative;
     text-decoration: none;
 
     &.last {
-      margin-right: 0;
       padding-right: 0;
     }
 
@@ -113,6 +111,7 @@ export namespace HeaderStyles {
     justify-content: center;
     align-items: center;
     margin-left: 40px;
+    margin-right: 1.8rem;
     font-family: 'Raleway';
   `
 }
