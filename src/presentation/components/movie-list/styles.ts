@@ -4,7 +4,7 @@ export namespace MovieListStyles {
   export const Container = styled('div')`
     flex: 1;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
     width: 100%;
