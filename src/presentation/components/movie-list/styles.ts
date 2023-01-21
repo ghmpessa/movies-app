@@ -9,6 +9,5 @@ export namespace MovieListStyles {
     flex-wrap: wrap;
     width: 100%;
     max-width: 1500px;
-    margin-bottom: 80px;
   `
 }

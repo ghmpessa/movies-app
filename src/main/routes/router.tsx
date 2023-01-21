@@ -1,18 +1,26 @@
 import React from 'react'
-import { makeRemoteRequestToken } from '@/main/factories/usecases'
+import {
+  makeRemoteCreateSession,
+  makeRemoteDeleteSession,
+  makeRemoteRequestToken,
+} from '@/main/factories/usecases'
 
 import { Footer, Header, MainContainer } from '@/presentation/components'
-import { Home } from '@/presentation/pages'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { MakeHome } from '@/main/factories/pages'
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
-      <Header requestToken={makeRemoteRequestToken()} />
+      <Header
+        requestToken={makeRemoteRequestToken()}
+        createSession={makeRemoteCreateSession()}
+        deleteSession={makeRemoteDeleteSession()}
+      />
       <MainContainer>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<MakeHome />} />
         </Routes>
       </MainContainer>
       <Footer />
