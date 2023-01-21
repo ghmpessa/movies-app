@@ -1,6 +1,8 @@
 import {
+  getCurrentAccount,
   getCurrentSession,
   getRequestToken,
+  setCurrentAccount,
   setCurrentSession,
   setRequestToken,
 } from '@/main/adapters'
@@ -13,6 +15,8 @@ import { ThemeProvider } from '@mui/material/styles'
 const value = {
   getCurrentSession: getCurrentSession,
   setCurrentSession: setCurrentSession,
+  getCurrentAccount: getCurrentAccount,
+  setCurrentAccount: setCurrentAccount,
   getRequestToken: getRequestToken,
   setRequestToken: setRequestToken,
 }
