@@ -1,4 +1,5 @@
 import { styled, Button as MUIButton } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 export namespace HeaderStyles {
   export const Height = 65
@@ -58,12 +59,12 @@ export namespace HeaderStyles {
     margin-right: 1.5rem;
   `
 
-  export const NavLinkContainer = styled('a')`
+  export const NavLinkContainer = styled(Link)`
     display: flex;
-    height: min-content;
     align-items: center;
-    padding: 10px;
-    margin: 0 10px;
+    justify-content: center;
+    padding: 10px 0px;
+    margin: 0 20px;
     position: relative;
     text-decoration: none;
 
@@ -72,7 +73,7 @@ export namespace HeaderStyles {
       padding-right: 0;
     }
 
-    &::after {
+    &:after {
       position: absolute;
       content: '';
       height: 2px;
@@ -82,8 +83,6 @@ export namespace HeaderStyles {
 
       border-radius: 6px;
       margin: 0 auto;
-      left: 0;
-      right: 0;
 
       -o-transition: 0.5s;
       -ms-transition: 0.5s;
@@ -93,7 +92,7 @@ export namespace HeaderStyles {
     }
 
     &:hover:after {
-      width: 80%;
+      width: 100%;
     }
   `
 
