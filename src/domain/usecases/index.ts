@@ -1,4 +1,5 @@
 export * from './account/load-account-details'
+export * from './movies/load-genres'
 export * from './movies/load-movie-cast'
 export * from './movies/load-movie-details'
 export * from './movies/load-movie-images'
