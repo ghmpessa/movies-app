@@ -30,8 +30,6 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
       try {
         const response = await loadWatchList.load({ session_id, page })
 
-        console.log(response)
-
         setData({
           ...response,
           results: [...data.results, ...response.results],
@@ -63,7 +61,11 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
       {!loading &&
         data.page !== data.total_pages &&
         data.results.length > 0 && (
-          <Styled.LoadMore variant='contained' color='primary'>
+          <Styled.LoadMore
+            variant='contained'
+            color='primary'
+            onClick={() => fetchMovies(data.page + 1)}
+          >
             Load more
           </Styled.LoadMore>
         )}
