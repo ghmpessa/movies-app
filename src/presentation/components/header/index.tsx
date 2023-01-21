@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { HeaderStyles as Styled } from './styles'
 
 import { useAppContext } from '@/presentation/contexts'
-import { CreateSession, DeleteSession, RequestToken } from '@/domain/usecases'
+import {
+  CreateSession,
+  DeleteSession,
+  LoadAccountDetails,
+  RequestToken,
+} from '@/domain/usecases'
 
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import LocalMoviesRoundedIcon from '@mui/icons-material/LocalMoviesRounded'
@@ -13,18 +18,22 @@ type Props = {
   requestToken: RequestToken
   createSession: CreateSession
   deleteSession: DeleteSession
+  loadAccountDetails: LoadAccountDetails
 }
 
 const Header: React.FC<Props> = ({
   requestToken,
   createSession,
   deleteSession,
+  loadAccountDetails,
 }) => {
   const {
     getRequestToken,
     setRequestToken,
     setCurrentSession,
     getCurrentSession,
+    getCurrentAccount,
+    setCurrentAccount,
   } = useAppContext()
 
   const handleRequest = async () => {
@@ -42,8 +51,12 @@ const Header: React.FC<Props> = ({
 
   const handleSession = async (request_token: string) => {
     try {
-      const response = await createSession.create({ request_token })
-      setCurrentSession?.(response.session_id)
+      const { session_id } = await createSession.create({ request_token })
+      const { id, name, username } = await loadAccountDetails.load({
+        session_id,
+      })
+      setCurrentSession?.(session_id)
+      setCurrentAccount?.({ id, name, username })
       setRequestToken?.(null)
       window.location.reload()
     } catch (error) {
@@ -59,6 +72,8 @@ const Header: React.FC<Props> = ({
 
       if (!session_id) return
       await deleteSession.delete({ session_id })
+      setCurrentSession?.(null)
+      setCurrentAccount?.(null)
     } catch (error) {
       console.log(error)
     }
