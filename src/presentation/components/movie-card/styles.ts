@@ -2,7 +2,7 @@ import { styled } from '@mui/material'
 
 export namespace MovieCardStyles {
   export const Container = styled('div')`
-    height: 350px;
+    height: 500px;
     width: 250px;
 
     display: flex;
@@ -29,8 +29,9 @@ export namespace MovieCardStyles {
     src: string
   }
 
-  export const Image = styled('div')<ImageProps>`
+  export const Image = styled('img')<ImageProps>`
     flex: 1;
+    height: 450px;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     background-image: url(${({ src }) => src});
@@ -40,12 +41,13 @@ export namespace MovieCardStyles {
   `
 
   export const InfosContainer = styled('div')`
+    height: 100px;
     display: flex;
     position: relative;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 15px 20px;
+    padding: 20px;
   `
 
   export const Title = styled('h2')`

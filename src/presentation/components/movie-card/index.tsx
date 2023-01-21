@@ -10,7 +10,7 @@ type Props = {
 
 const MovieCard: React.FC<Props> = ({ movie }) => {
   // images base url
-  const urlPrefix = 'https://image.tmdb.org/t/p/w500'
+  const urlPrefix = 'https://image.tmdb.org/t/p/w300'
 
   // give border colors according to rating
   const rate =
