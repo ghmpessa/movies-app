@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({
     setCurrentAccount,
   } = useAppContext()
 
-  const [ísLogged, setIsLogged] = useState(getCurrentSession?.() ? true : false)
+  const [isLogged, setIsLogged] = useState(getCurrentSession?.() ? true : false)
 
   const handleRequest = async () => {
     try {
@@ -107,7 +107,7 @@ const Header: React.FC<Props> = ({
           <LocalMoviesRoundedIcon sx={{ color: 'white' }} />
           <Styled.NavLink>Movies</Styled.NavLink>
         </Styled.NavLinkContainer>
-        {ísLogged ? (
+        {isLogged ? (
           <>
             <Styled.NavLinkContainer
               to={`${getCurrentAccount?.().id}/watch-list`}
