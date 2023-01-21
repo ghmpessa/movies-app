@@ -1,4 +1,4 @@
-export { default as Fab } from './fab'
+export { default as ScrollToTopFab } from './scroll-to-top-fab'
 export { default as Footer } from './footer'
 export { default as Error } from './error'
 export { default as Header } from './header'

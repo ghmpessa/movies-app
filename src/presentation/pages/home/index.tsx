@@ -1,18 +1,19 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { HomePageStyles as Styled } from './styles'
 
-import { Error, Fab, Loading, MovieList } from '@/presentation/components'
+import {
+  Error,
+  ScrollToTopFab,
+  Loading,
+  MovieList,
+} from '@/presentation/components'
 import { LoadMovies } from '@/domain/usecases'
-
-import KeyboardDoubleArrowUpRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowUpRounded'
-import { useScrollToTop } from '@/presentation/hooks'
 
 type Props = {
   loadMovies: LoadMovies
 }
 
 const HomePage: React.FC<Props> = ({ loadMovies }) => {
-  const [isVisible, scrollToTop] = useScrollToTop()
   const [data, setData] = useState<LoadMovies.Model>({
     results: [],
     page: 1,
@@ -62,9 +63,6 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
       )}
       {!loading && !error && <MovieList movies={data ? data.results : []} />}
       {!loading && error && <Error />}
-      <Fab isVisible={isVisible} handleScrollToTop={scrollToTop}>
-        <KeyboardDoubleArrowUpRoundedIcon />
-      </Fab>
       {!loading && (
         <Styled.LoadMore
           variant='contained'
@@ -74,6 +72,7 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
           Load more
         </Styled.LoadMore>
       )}
+      <ScrollToTopFab />
     </Styled.Container>
   )
 }
