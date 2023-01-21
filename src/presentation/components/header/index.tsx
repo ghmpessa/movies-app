@@ -36,6 +36,8 @@ const Header: React.FC<Props> = ({
     setCurrentAccount,
   } = useAppContext()
 
+  const accountId = getCurrentAccount?.().id
+
   const handleRequest = async () => {
     try {
       const { request_token } = await requestToken.request()
@@ -106,7 +108,7 @@ const Header: React.FC<Props> = ({
         </Styled.NavLinkContainer>
         {getCurrentSession?.() ? (
           <>
-            <Styled.NavLinkContainer to='/watch-list'>
+            <Styled.NavLinkContainer to={`${accountId}/watch-list`}>
               <BookmarkIcon sx={{ color: 'white' }} />
               <Styled.NavLink>Watch List</Styled.NavLink>
             </Styled.NavLinkContainer>
