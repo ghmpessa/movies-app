@@ -3,4 +3,4 @@ import { RemoteLoadAccountDetails } from '@/data/usecases/account'
 import { LoadAccountDetails } from '@/domain/usecases'
 
 export const makeRemoteLoadAccountDetails = (): LoadAccountDetails =>
-  new RemoteLoadAccountDetails(makeApiUrl(''), makeAxiosHttpClient())
+  new RemoteLoadAccountDetails(makeApiUrl('/account'), makeAxiosHttpClient())
