@@ -1,4 +1,9 @@
-import { getCurrentSession, setCurrentSession } from '@/main/adapters'
+import {
+  getCurrentSession,
+  getRequestToken,
+  setCurrentSession,
+  setRequestToken,
+} from '@/main/adapters'
 import { theme } from '@/main/config'
 import { Router } from '@/main/routes'
 import { AppProvider } from '@/presentation/contexts'
@@ -8,6 +13,8 @@ import { ThemeProvider } from '@mui/material/styles'
 const value = {
   getCurrentSession: getCurrentSession,
   setCurrentSession: setCurrentSession,
+  getRequestToken: getRequestToken,
+  setRequestToken: setRequestToken,
 }
 
 function App() {
