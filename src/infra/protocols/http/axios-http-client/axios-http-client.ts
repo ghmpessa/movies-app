@@ -4,10 +4,8 @@ import axios, { AxiosResponse } from 'axios'
 export class AxiosHttpClient implements HttpClient {
   async request(data: Http.Request): Promise<Http.Response> {
     const API_KEY = import.meta.env.VITE_API_KEY
-    const { url: path, method, body, headers, params } = data
+    const { url, method, body, headers, params } = data
     let axiosResponse: AxiosResponse
-
-    const url = `${path}?${API_KEY}`
 
     try {
       axiosResponse = await axios.request({
@@ -15,7 +13,10 @@ export class AxiosHttpClient implements HttpClient {
         method,
         data: body,
         headers,
-        params,
+        params: {
+          api_key: API_KEY,
+          ...params,
+        },
       })
     } catch (error: any) {
       axiosResponse = error.response
