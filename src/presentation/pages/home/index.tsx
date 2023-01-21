@@ -20,15 +20,12 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
     total_pages: 0,
     total_results: 0,
   })
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
   const fetchMovies = useCallback(
     async (page = 1) => {
-      console.log('pagina', page)
       try {
-        if (loading) return
-
         const response = await loadMovies.load({ page })
 
         setData({
