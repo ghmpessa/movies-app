@@ -2,7 +2,7 @@ import React from 'react'
 import { MovieCardStyles as Styled } from './styles'
 
 import { format } from 'date-fns'
-import { Movie } from '@/domain/model'
+import { Movie } from '@/domain/models'
 
 type Props = {
   movie: Movie.ShortModel

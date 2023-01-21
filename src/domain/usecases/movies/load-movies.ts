@@ -1,4 +1,4 @@
-import { Movie } from '@/domain/model'
+import { Movie } from '@/domain/models'
 
 export interface LoadMovies {
   load(params?: LoadMovies.Params): Promise<LoadMovies.Model>

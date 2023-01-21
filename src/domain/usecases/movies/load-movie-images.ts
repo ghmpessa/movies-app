@@ -1,4 +1,4 @@
-import { Image } from '@/domain/model'
+import { Image } from '@/domain/models'
 
 export interface LoadMovieImages {
   load(): Promise<LoadMovieImages.Model>
