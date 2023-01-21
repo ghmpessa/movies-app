@@ -94,6 +94,8 @@ export namespace HeaderStyles {
     &:hover:after {
       width: 100%;
     }
+
+    transition: all 0.4s cubic-bezier(0.095, 0.79, 0.88, 1.535);
   `
 
   export const NavLink = styled('p')`
