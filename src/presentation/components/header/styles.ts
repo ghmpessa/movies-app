@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { styled, Button as MUIButton } from '@mui/material'
 
 export namespace HeaderStyles {
   export const Height = 65
@@ -103,5 +103,15 @@ export namespace HeaderStyles {
     font-weight: 500;
     margin: 0;
     margin-left: 8px;
+  `
+
+  export const Button = styled(MUIButton)`
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+    font-family: 'Raleway';
   `
 }

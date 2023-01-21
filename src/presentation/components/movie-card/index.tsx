@@ -11,8 +11,10 @@ const example = {
 }
 
 const MovieCard: React.FC = () => {
+  // images base url
   const urlPrefix = 'https://image.tmdb.org/t/p/w500'
 
+  // give border colors according to rating
   const rate =
     example.vote_average < 3
       ? 'red'
@@ -20,10 +22,10 @@ const MovieCard: React.FC = () => {
       ? 'yellow'
       : 'green'
 
+  // format date
   const day = example.release_date.slice(8)
   const month = example.release_date.slice(5, 7)
   const year = example.release_date.slice(0, 4)
-
   const releaseDate = format(
     new Date([month, day, year].join('-')),
     'MMMM dd, yyyy'

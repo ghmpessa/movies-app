@@ -19,6 +19,7 @@ const Header: React.FC = () => {
           <BookmarkIcon sx={{ color: 'white' }} />
           <Styled.NavLink>Watch List</Styled.NavLink>
         </Styled.NavLinkContainer>
+        <Styled.Button variant='outlined'>Login</Styled.Button>
       </Styled.NavContainer>
     </Styled.Container>
   )
