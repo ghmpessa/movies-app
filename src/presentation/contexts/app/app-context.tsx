@@ -2,8 +2,10 @@ import { createContext } from 'react'
 import { useContext } from 'react'
 
 type Props = {
-  setCurrentSession?: (session_id: string) => void
+  setCurrentSession?: (session_id: string | null) => void
   getCurrentSession?: () => string
+  setRequestToken?: (session_id: string | null) => void
+  getRequestToken?: () => string
 }
 
 const Context = createContext<Props>({})
