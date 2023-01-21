@@ -6,7 +6,7 @@ import { FooterStyles } from '../footer/styles'
 export namespace MainContainerStyles {
   export const Container = styled('main')`
     margin-top: ${HeaderStyles.Height}px;
-    min-height: calc(100vh - (${HeaderStyles.Height + FooterStyles.Height}));
+    min-height: calc(100vh - (${HeaderStyles.Height + FooterStyles.Height}px));
     display: flex;
     align-items: center;
     justify-content: center;
