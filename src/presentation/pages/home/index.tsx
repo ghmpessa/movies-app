@@ -5,13 +5,14 @@ import { Error, Fab, Loading, MovieList } from '@/presentation/components'
 import { LoadMovies } from '@/domain/usecases'
 
 import KeyboardDoubleArrowUpRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowUpRounded'
+import { useScrollToTop } from '@/presentation/hooks'
 
 type Props = {
   loadMovies: LoadMovies
 }
 
 const HomePage: React.FC<Props> = ({ loadMovies }) => {
-  const [isFabVisible, setIsFabVisible] = useState(false)
+  const [isVisible, scrollToTop] = useScrollToTop()
   const [data, setData] = useState<LoadMovies.Model>({
     results: [],
     page: 1,
@@ -42,10 +43,6 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
     [data]
   )
 
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   useEffect(() => {
     let isMounted = true
 
@@ -56,22 +53,6 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
     }
   }, [])
 
-  useEffect(() => {
-    const fabListener = () => {
-      if (window.scrollY > window.innerHeight && !isFabVisible) {
-        setIsFabVisible(true)
-      } else if (window.scrollY < window.innerHeight && isFabVisible) {
-        setIsFabVisible(false)
-      }
-    }
-
-    window.addEventListener('scroll', fabListener)
-
-    return () => {
-      window.removeEventListener('scroll', fabListener)
-    }
-  }, [isFabVisible])
-
   return (
     <Styled.Container>
       {loading && (
@@ -81,7 +62,7 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
       )}
       {!loading && !error && <MovieList movies={data ? data.results : []} />}
       {!loading && error && <Error />}
-      <Fab isVisible={isFabVisible} handleScrollToTop={handleScrollToTop}>
+      <Fab isVisible={isVisible} handleScrollToTop={scrollToTop}>
         <KeyboardDoubleArrowUpRoundedIcon />
       </Fab>
       {!loading && (
