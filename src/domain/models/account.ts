@@ -12,4 +12,10 @@ export namespace Account {
     include_adult: boolean
     username: string
   }
+
+  export type Current = {
+    id: number
+    name: string
+    username: string
+  }
 }
