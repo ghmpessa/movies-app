@@ -96,7 +96,11 @@ const Header: React.FC<Props> = ({
               <Styled.NavLink>Watch List</Styled.NavLink>
             </Styled.NavLinkContainer>
 
-            <Styled.NavLinkContainer to='/' onClick={handleLogout}>
+            <Styled.NavLinkContainer
+              to='/'
+              onClick={handleLogout}
+              className='last'
+            >
               <ExitToAppRoundedIcon sx={{ color: 'white' }} />
               <Styled.NavLink>Logout</Styled.NavLink>
             </Styled.NavLinkContainer>
