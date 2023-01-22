@@ -6,10 +6,21 @@ import { useNavigate } from 'react-router-dom'
 
 type Props = {
   movies: Array<Movie.ShortModel>
+  emptyList: {
+    title: string
+    buttonTitle: string
+  }
+  handleClick?: () => void
 }
 
-const MovieList: React.FC<Props> = ({ movies }) => {
+const MovieList: React.FC<Props> = ({ movies, emptyList, handleClick }) => {
   const navigate = useNavigate()
+
+  const onButtonClick = () => {
+    if (handleClick) return handleClick()
+    navigate('/')
+  }
+
   return (
     <Styled.Container isEmpty={movies.length === 0}>
       {movies.length > 0 ? (
@@ -18,10 +29,9 @@ const MovieList: React.FC<Props> = ({ movies }) => {
         ))
       ) : (
         <Styled.EmptyList>
-          <h3>Your watchlist is empty</h3>
-          <h3>Show us some movies you want to watch</h3>
-          <Styled.Button variant='contained' onClick={() => navigate('/')}>
-            Go to movies
+          <h3>{emptyList.title}</h3>
+          <Styled.Button variant='contained' onClick={onButtonClick}>
+            {emptyList.buttonTitle}
           </Styled.Button>
         </Styled.EmptyList>
       )}

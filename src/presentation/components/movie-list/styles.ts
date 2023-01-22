@@ -14,7 +14,8 @@ export namespace MovieListStyles {
     justify-content: ${({ isEmpty }) => (isEmpty ? 'center' : 'space-between')};
     margin-top: 3rem;
 
-    @media (max-width: 760px) {
+    @media (max-width: 750px) {
+      grid-template-columns: repeat(1, 250px);
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -26,7 +27,7 @@ export namespace MovieListStyles {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    align-self: flex-start;
+    align-self: center;
     text-align: center;
 
     h3 {
