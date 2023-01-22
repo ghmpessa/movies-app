@@ -6,9 +6,10 @@ import ImageCard from '../image-card'
 
 type Props = {
   images: Array<Image.Model>
+  title?: string
 }
 
-const ImageList: React.FC<Props> = ({ images }) => {
+const ImageList: React.FC<Props> = ({ images, title }) => {
   const prefix = 'https://image.tmdb.org/t/p/w500'
   return (
     <Styled.Container>
@@ -17,6 +18,7 @@ const ImageList: React.FC<Props> = ({ images }) => {
           src={`${prefix}${image.file_path}`}
           isLast={index === images.length - 1}
           key={image.file_path + Math.random()}
+          title={title}
         />
       ))}
     </Styled.Container>

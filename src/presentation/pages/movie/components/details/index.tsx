@@ -5,15 +5,33 @@ import { LoadMovieDetails } from '@/domain/usecases'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import QueryBuilderRoundedIcon from '@mui/icons-material/QueryBuilderRounded'
 import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded'
-import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined'
 import ConfirmationNumberRoundedIcon from '@mui/icons-material/ConfirmationNumberRounded'
+import RequestQuoteRoundedIcon from '@mui/icons-material/RequestQuoteRounded'
+
+import { format } from 'date-fns'
 
 type Props = {
   details: LoadMovieDetails.Model
 }
 
 const DetailsSection: React.FC<Props> = ({ details }) => {
+  // format date
+  const day = details.release_date!.slice(8)
+  const month = details.release_date!.slice(5, 7)
+  const year = details.release_date!.slice(0, 4)
+  const releaseDate = format(
+    new Date([month, day, year].join('-')),
+    'MMMM dd, yyyy'
+  )
+  // image url
   const prefix = 'https://image.tmdb.org/t/p/w300'
+
+  // create currency formatter
+  const formatCurrency = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
+
   return (
     <Styled.Container>
       <Styled.Poster src={`${prefix}/${details.poster_path}`} />
@@ -43,6 +61,9 @@ const DetailsSection: React.FC<Props> = ({ details }) => {
         <Styled.MainInfosContainer>
           <h3>genres</h3>
           <Styled.GenresContainer>
+            {details.genres?.map(genre => (
+              <Styled.GenresCard key={genre.id}>{genre.name}</Styled.GenresCard>
+            ))}
             <Styled.GenresCard>{'Action'}</Styled.GenresCard>
             <Styled.GenresCard>{'Comedy'}</Styled.GenresCard>
             <Styled.GenresCard>{'Animation'}</Styled.GenresCard>
@@ -54,7 +75,7 @@ const DetailsSection: React.FC<Props> = ({ details }) => {
           <Styled.FooterInfosContainer>
             <Styled.FooterInfoContainer className='first'>
               <CalendarMonthIcon sx={{ width: 32, height: 32 }} />
-              <label>{details.release_date}</label>
+              <label>{releaseDate}</label>
             </Styled.FooterInfoContainer>
 
             <Styled.FooterInfoContainer>
@@ -66,14 +87,14 @@ const DetailsSection: React.FC<Props> = ({ details }) => {
             </Styled.FooterInfoContainer>
 
             <Styled.FooterInfoContainer>
-              <AttachMoneyOutlinedIcon sx={{ width: 32, height: 32 }} />
+              <RequestQuoteRoundedIcon sx={{ width: 32, height: 32 }} />
 
-              <label>{details.budget}</label>
+              <label>{formatCurrency.format(details.budget)}</label>
             </Styled.FooterInfoContainer>
 
             <Styled.FooterInfoContainer>
               <ConfirmationNumberRoundedIcon sx={{ width: 32, height: 32 }} />
-              <label>${details.revenue}</label>
+              <label>{formatCurrency.format(details.revenue)}</label>
             </Styled.FooterInfoContainer>
           </Styled.FooterInfosContainer>
         </Styled.MainInfosContainer>
