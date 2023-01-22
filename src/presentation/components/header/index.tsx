@@ -9,10 +9,8 @@ import {
   RequestToken,
 } from '@/domain/usecases'
 
-import BookmarkIcon from '@mui/icons-material/Bookmark'
-import LocalMoviesRoundedIcon from '@mui/icons-material/LocalMoviesRounded'
-import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded'
 import { Link } from 'react-router-dom'
+import { Menu, NavBar } from './components'
 
 type Props = {
   requestToken: RequestToken
@@ -37,6 +35,7 @@ const Header: React.FC<Props> = ({
   } = useAppContext()
 
   const [isLogged, setIsLogged] = useState(getCurrentSession?.() ? true : false)
+  const [showHamburger, setShowHamburger] = useState(false)
 
   const handleRequest = async () => {
     try {
@@ -66,8 +65,8 @@ const Header: React.FC<Props> = ({
     }
   }
 
-  const handleLogout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
+  const handleLogout = async (e?: React.MouseEvent<HTMLAnchorElement>) => {
+    e?.preventDefault()
 
     try {
       const session_id = getCurrentSession?.()
@@ -99,6 +98,19 @@ const Header: React.FC<Props> = ({
     }
   }, [])
 
+  useEffect(() => {
+    const resize = (): void => {
+      if (window.innerWidth < 880) {
+        setShowHamburger(true)
+      } else {
+        setShowHamburger(false)
+      }
+    }
+    resize()
+    window.addEventListener('resize', resize)
+    return () => window.removeEventListener('resize', resize)
+  })
+
   return (
     <Styled.Container>
       <Styled.LogoContainer>
@@ -106,35 +118,20 @@ const Header: React.FC<Props> = ({
           moviewing
         </Link>
       </Styled.LogoContainer>
-      <Styled.NavContainer>
-        <Styled.NavLinkContainer to='/'>
-          <LocalMoviesRoundedIcon sx={{ color: 'white' }} />
-          <Styled.NavLink>Movies</Styled.NavLink>
-        </Styled.NavLinkContainer>
-        {isLogged ? (
-          <>
-            <Styled.NavLinkContainer
-              to={`${getCurrentAccount?.().id}/watch-list`}
-            >
-              <BookmarkIcon sx={{ color: 'white' }} />
-              <Styled.NavLink>Watch List</Styled.NavLink>
-            </Styled.NavLinkContainer>
-
-            <Styled.NavLinkContainer
-              to='/'
-              onClick={handleLogout}
-              className='last'
-            >
-              <ExitToAppRoundedIcon sx={{ color: 'white' }} />
-              <Styled.NavLink>Logout</Styled.NavLink>
-            </Styled.NavLinkContainer>
-          </>
-        ) : (
-          <Styled.Button variant='outlined' onClick={handleRequest}>
-            login
-          </Styled.Button>
-        )}
-      </Styled.NavContainer>
+      {!showHamburger && (
+        <NavBar
+          isLogged={isLogged}
+          handleLogout={handleLogout}
+          handleRequest={handleRequest}
+        />
+      )}
+      {showHamburger && (
+        <Menu
+          isLogged={isLogged}
+          handleLogout={handleLogout}
+          handleRequest={handleRequest}
+        />
+      )}
     </Styled.Container>
   )
 }

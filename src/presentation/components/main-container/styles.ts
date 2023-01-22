@@ -9,8 +9,9 @@ export namespace MainContainerStyles {
     width: 100%;
     min-height: calc(100vh - (${HeaderStyles.Height + FooterStyles.Height}px));
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     background-color: ${({ theme }) => theme.palette.background.default};
     padding: 0px calc((100% - 1460px) / 2);
 
