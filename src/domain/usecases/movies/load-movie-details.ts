@@ -10,5 +10,6 @@ export namespace LoadMovieDetails {
     revenue: number
     runtime: number
     tagline: string
+    genres: Array<{ id: number; name: string }>
   } & Movie.Model
 }

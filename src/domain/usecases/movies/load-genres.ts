@@ -4,7 +4,6 @@ export interface LoadGenres {
 
 export namespace LoadGenres {
   export type Model = {
-    id: number
-    name: string
+    genres: Array<{ id: number; name: string }>
   }
 }

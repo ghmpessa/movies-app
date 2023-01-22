@@ -10,7 +10,6 @@ type Props = {
 
 const ImageList: React.FC<Props> = ({ images }) => {
   const prefix = 'https://image.tmdb.org/t/p/w500'
-  console.log(`${prefix}${images[0].file_path}`)
   return (
     <Styled.Container>
       {images.map((image, index) => (
