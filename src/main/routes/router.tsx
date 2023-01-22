@@ -24,7 +24,7 @@ const Router: React.FC = () => {
         <Routes>
           <Route path='/' element={<MakeHome />} />
           <Route path='/:movieId' element={<MakeMoviePage />} />
-          <Route path='/:id/watch-list' element={<MakeWatchList />} />
+          <Route path='/:id/watchlist' element={<MakeWatchList />} />
         </Routes>
       </MainContainer>
       <Footer />
