@@ -11,5 +11,8 @@ export namespace SearchMovies {
     total_pages: number
     total_results: number
   }
-  export type Params = { query: string }
+  export type Params = {
+    query: string
+    page: number
+  }
 }
