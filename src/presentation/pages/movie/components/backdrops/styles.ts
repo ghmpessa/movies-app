@@ -21,6 +21,18 @@ export namespace BackdropSectionStyles {
       align-items: center;
       justify-content: center;
       margin: 0px 0px 1.5rem;
+      z-index: 1;
+
+      &::before {
+        content: '';
+        height: 40px;
+        position: absolute;
+        width: 4px;
+        left: -10px;
+        top: 4px;
+        z-index: -1;
+        background-color: ${({ theme }) => theme.palette.primary.main};
+      }
     }
   `
 }

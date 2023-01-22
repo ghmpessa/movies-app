@@ -14,6 +14,8 @@ export namespace MainContainerStyles {
     background-color: ${({ theme }) => theme.palette.background.default};
     padding: 0px calc((100% - 1460px) / 2);
 
+    z-index: 10;
+
     @media (max-width: 1500px) {
       padding: 0px 20px;
     }
