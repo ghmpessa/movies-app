@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { HomePageStyles as Styled } from './styles'
+import { WathlistStyles as Styled } from './styles'
 
 import {
   Error,
@@ -49,7 +49,7 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
 
   return (
     <Styled.Container isEmpty={data.results.length === 0}>
-      <h2>my watchlist</h2>
+      <Styled.Title>my watchlist</Styled.Title>
       {loading && (
         <Styled.LoadingContainer>
           <Loading />

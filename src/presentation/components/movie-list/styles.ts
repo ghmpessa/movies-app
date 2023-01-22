@@ -9,10 +9,9 @@ export namespace MovieListStyles {
     margin: auto;
     width: 100%;
     max-width: 1500px;
-    display: flex;
+    display: ${({ isEmpty }) => (isEmpty ? 'flex' : 'grid')};
+    grid-template-columns: repeat(auto-fill, 250px);
     justify-content: ${({ isEmpty }) => (isEmpty ? 'center' : 'space-between')};
-    align-items: flex-start;
-    flex-wrap: wrap;
     margin-top: 3rem;
 
     @media (max-width: 760px) {

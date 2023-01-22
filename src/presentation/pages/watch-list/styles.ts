@@ -2,31 +2,28 @@ import { FooterStyles } from '@/presentation/components/footer/styles'
 import { HeaderStyles } from '@/presentation/components/header/styles'
 import { styled, Button as MUIButton } from '@mui/material'
 
-export namespace HomePageStyles {
+export namespace WathlistStyles {
   type ContainerProps = {
     isEmpty?: boolean
   }
 
   export const Container = styled('div')<ContainerProps>`
     flex: 1;
-    min-height: ${({ isEmpty }) =>
-      isEmpty
-        ? `calc(100vh - ${HeaderStyles.Height + FooterStyles.Height}px)`
-        : '0px'};
+    min-height: calc(100vh - ${HeaderStyles.Height + FooterStyles.Height}px);
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+  `
 
-    h2 {
-      font-size: 2rem;
-      font-weight: bold;
-      line-height: 3rem;
-      color: ${({ theme }) => theme.palette.primary.contrastText};
-      align-self: flex-start;
-      margin: 2rem;
-    }
+  export const Title = styled('h2')`
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 3rem;
+    color: ${({ theme }) => theme.palette.primary.contrastText};
+    align-self: flex-start;
+    margin: 3rem 0 0 0;
   `
 
   export const LoadingContainer = styled('div')`
