@@ -9,10 +9,15 @@ export class RemoteAddToWatchList implements AddToWatchList {
   ) {}
 
   async add(params: AddToWatchList.Params): Promise<void> {
+    const body: Partial<AddToWatchList.Params> = {
+      media_id: params.media_id,
+      media_type: params.media_type,
+      watchlist: params.watchlist,
+    }
     const httpResponse = await this.httpClient.request({
       url: this.url,
       method: 'post',
-      body: params,
+      body,
       params: params.session_id,
     })
 
