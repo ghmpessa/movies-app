@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { MoviePageStyles as Styled } from './styles'
 import { BackdropSection, CastSection, DetailsSection } from './components'
 
+import { useAppContext } from '@/presentation/contexts'
+
 import { Error, Loading } from '@/presentation/components'
 import {
   AddToWatchList,
+  DeleteRating,
   LoadMovieCast,
   LoadMovieDetails,
   LoadMovieImages,
@@ -12,7 +15,6 @@ import {
   RateMovie,
 } from '@/domain/usecases'
 import { Cast, Image } from '@/domain/models'
-import { useAppContext } from '@/presentation/contexts'
 
 type Props = {
   loadMovieDetails: LoadMovieDetails
@@ -21,6 +23,7 @@ type Props = {
   loadWatchList: LoadWatchList
   addToWatchList: AddToWatchList
   addRating: RateMovie
+  removeRating: DeleteRating
 }
 
 const Movie: React.FC<Props> = ({
@@ -30,6 +33,7 @@ const Movie: React.FC<Props> = ({
   loadWatchList,
   addToWatchList,
   addRating,
+  removeRating,
 }) => {
   const { getCurrentSession } = useAppContext()
 
@@ -85,9 +89,20 @@ const Movie: React.FC<Props> = ({
   }
 
   const handleRating = async (rating: number) => {
+    console.log(rating)
     try {
       await addRating.rate({ value: rating * 2 })
-      setRating(rating)
+      setRating(rating * 2)
+    } catch (error) {
+      setError(true)
+    }
+  }
+
+  const handleRemoveRating = async () => {
+    try {
+      if (rating === 0) return
+      await removeRating.delete()
+      setRating(0)
     } catch (error) {
       setError(true)
     }
@@ -121,6 +136,7 @@ const Movie: React.FC<Props> = ({
             onAddToWatchList={handleAddToWatchList}
             rating={rating}
             onRating={handleRating}
+            onRemoveRating={handleRemoveRating}
           />
           <CastSection cast={cast} />
           <BackdropSection images={images} title={details.title} />

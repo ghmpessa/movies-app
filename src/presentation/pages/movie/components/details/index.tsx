@@ -12,7 +12,6 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 
 import { format } from 'date-fns'
-import { useTheme } from '@mui/material'
 import { Rating } from '@mui/material'
 
 type Props = {
@@ -21,6 +20,7 @@ type Props = {
   isOnWatchList?: boolean
   rating: number
   onRating: (rating: number) => void
+  onRemoveRating: () => void
 }
 
 const DetailsSection: React.FC<Props> = ({
@@ -29,9 +29,8 @@ const DetailsSection: React.FC<Props> = ({
   isOnWatchList,
   rating,
   onRating,
+  onRemoveRating,
 }) => {
-  const { palette } = useTheme()
-
   // format date
   const day = details.release_date!.slice(8)
   const month = details.release_date!.slice(5, 7)
@@ -79,9 +78,11 @@ const DetailsSection: React.FC<Props> = ({
           </Styled.HeaderButtonsContainer>
         </Styled.HeaderContainer>
 
-        <Styled.RatingContainer>
+        <Styled.RatingContainer onClick={onRemoveRating}>
           <Rating
-            value={rating / 2}
+            value={rating}
+            max={5}
+            precision={0.5}
             onChange={(_, rating) => onRating(rating!)}
             readOnly={rating > 0}
             icon={
