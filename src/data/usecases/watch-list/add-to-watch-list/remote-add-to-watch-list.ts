@@ -21,10 +21,13 @@ export class RemoteAddToWatchList implements AddToWatchList {
       params: params.session_id,
     })
 
-    if (httpResponse.statusCode !== Http.StatusCode.created) {
-      throw new HttpError(this.url, httpResponse)
+    switch (httpResponse.statusCode) {
+      case Http.StatusCode.created:
+        return
+      case Http.StatusCode.ok:
+        return
+      default:
+        throw new HttpError(this.url, httpResponse)
     }
-
-    return
   }
 }
