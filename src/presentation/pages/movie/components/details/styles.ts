@@ -100,7 +100,9 @@ export namespace DetailsSectionStyles {
     }
   `
 
-  export const Button = styled(MUIFab)`
+  type ButtonProps = { isOnWatchList?: boolean }
+
+  export const Button = styled(MUIFab)<ButtonProps>`
     display: flex;
     flex-direction: column;
     max-width: 56px;
@@ -115,11 +117,14 @@ export namespace DetailsSectionStyles {
     }
 
     &:hover:after {
-      content: 'Add to watchlist';
+      content: ${({ isOnWatchList }) =>
+        isOnWatchList ? '"Remove from watchlist"' : '"Add to watchlist"'};
       align-self: center;
       margin-left: 24px;
       position: absolute;
       width: 200px;
+
+      color: ${({ theme }) => theme.palette.common.white};
 
       animation: ${appear} 0.4s forwards;
     }

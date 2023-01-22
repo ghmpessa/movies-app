@@ -7,14 +7,21 @@ import QueryBuilderRoundedIcon from '@mui/icons-material/QueryBuilderRounded'
 import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded'
 import ConfirmationNumberRoundedIcon from '@mui/icons-material/ConfirmationNumberRounded'
 import RequestQuoteRoundedIcon from '@mui/icons-material/RequestQuoteRounded'
+import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove'
 
 import { format } from 'date-fns'
 
 type Props = {
   details: LoadMovieDetails.Model
+  onAddToWatchList?: () => void
+  isOnWatchList?: boolean
 }
 
-const DetailsSection: React.FC<Props> = ({ details }) => {
+const DetailsSection: React.FC<Props> = ({
+  details,
+  onAddToWatchList,
+  isOnWatchList,
+}) => {
   // format date
   const day = details.release_date!.slice(8)
   const month = details.release_date!.slice(5, 7)
@@ -48,8 +55,14 @@ const DetailsSection: React.FC<Props> = ({ details }) => {
               <label>{details.vote_average?.toFixed(1)}</label>
             </Styled.Rate>
 
-            <Styled.Button variant='circular' color='primary'>
-              <BookmarkAddRoundedIcon />
+            <Styled.Button
+              variant='circular'
+              color={isOnWatchList ? 'success' : 'primary'}
+              onClick={onAddToWatchList}
+              isOnWatchList={isOnWatchList}
+            >
+              {!isOnWatchList && <BookmarkAddRoundedIcon />}
+              {isOnWatchList && <BookmarkRemoveIcon sx={{ color: 'white' }} />}
             </Styled.Button>
           </Styled.HeaderButtonsContainer>
         </Styled.HeaderContainer>

@@ -4,26 +4,36 @@ import { BackdropSection, CastSection, DetailsSection } from './components'
 
 import { Error, Loading } from '@/presentation/components'
 import {
+  AddToWatchList,
   LoadMovieCast,
   LoadMovieDetails,
   LoadMovieImages,
+  LoadWatchList,
 } from '@/domain/usecases'
 import { Cast, Image } from '@/domain/models'
+import { useAppContext } from '@/presentation/contexts'
 
 type Props = {
   loadMovieDetails: LoadMovieDetails
   loadMovieCast: LoadMovieCast
   loadMovieImages: LoadMovieImages
+  loadWatchList: LoadWatchList
+  addToWatchList: AddToWatchList
 }
 
 const Movie: React.FC<Props> = ({
   loadMovieDetails,
   loadMovieCast,
   loadMovieImages,
+  loadWatchList,
+  addToWatchList,
 }) => {
+  const { getCurrentSession } = useAppContext()
+
   const [details, setDetails] = useState<LoadMovieDetails.Model>()
   const [cast, setCast] = useState<Cast.Model[]>([])
   const [images, setImages] = useState<Image.Model[]>([])
+  const [onWatchList, setOnWatchList] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
@@ -37,10 +47,32 @@ const Movie: React.FC<Props> = ({
       setDetails(details)
       setCast(cast)
       setImages(backdrops)
+      const session_id = getCurrentSession?.()
+      const { results } = await loadWatchList.load({ session_id: session_id! })
+
+      if (results.map(item => item.id).includes(details.id!))
+        setOnWatchList(true)
     } catch (error) {
       setError(true)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleAddToWatchList = async () => {
+    const session_id = getCurrentSession?.()
+    const watchlist = onWatchList ? false : true
+    try {
+      if (!session_id) return
+      await addToWatchList.add({
+        session_id,
+        media_id: details!.id!,
+        media_type: 'movie',
+        watchlist,
+      })
+    } catch (error) {
+    } finally {
+      setOnWatchList(p => !p)
     }
   }
 
@@ -56,10 +88,21 @@ const Movie: React.FC<Props> = ({
           <Loading />
         </Styled.LoadingContainer>
       )}
-      {!loading && error && <Error />}
+      {!loading && error && (
+        <Error
+          onTryAgain={() => {
+            setLoading(true)
+            fetchMovie()
+          }}
+        />
+      )}
       {!loading && details && (
         <>
-          <DetailsSection details={details} />
+          <DetailsSection
+            details={details}
+            isOnWatchList={onWatchList}
+            onAddToWatchList={handleAddToWatchList}
+          />
           <CastSection cast={cast} />
           <BackdropSection images={images} title={details.title} />
         </>
