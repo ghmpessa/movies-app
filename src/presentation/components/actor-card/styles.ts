@@ -80,4 +80,14 @@ export namespace ActorCard {
       cursor: pointer;
     }
   `
+
+  export const NoPhoto = styled('div')`
+    flex: 1;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  `
 }
