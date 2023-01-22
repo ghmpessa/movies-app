@@ -3,12 +3,14 @@ import { MovieCardStyles as Styled } from './styles'
 
 import { format } from 'date-fns'
 import { Movie } from '@/domain/models'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   movie: Movie.ShortModel
 }
 
 const MovieCard: React.FC<Props> = ({ movie }) => {
+  const navigate = useNavigate()
   // images base url
   const urlPrefix = 'https://image.tmdb.org/t/p/w300'
 
@@ -30,7 +32,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
   )
 
   return (
-    <Styled.Container>
+    <Styled.Container onClick={() => navigate(`/${movie.id}`)}>
       <Styled.Image src={`${urlPrefix}${movie.poster_path}`} />
       <Styled.InfosContainer>
         <Styled.Title>{movie.title}</Styled.Title>
