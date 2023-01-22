@@ -16,6 +16,8 @@ export namespace HeaderStyles {
     align-items: center;
     padding: 0px calc((100% - 1500px) / 2);
 
+    margin: 0 auto;
+
     background-color: ${({ theme: { palette } }) => palette.background.paper};
     box-shadow: 0px 2px 2px rgba(31, 0, 2, 0.25);
 
