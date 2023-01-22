@@ -11,6 +11,7 @@ import {
   LoadMovieCast,
   LoadMovieDetails,
   LoadMovieImages,
+  LoadRatedMovies,
   LoadWatchList,
   RateMovie,
 } from '@/domain/usecases'
@@ -24,6 +25,7 @@ type Props = {
   addToWatchList: AddToWatchList
   addRating: RateMovie
   removeRating: DeleteRating
+  loadRatedMovies: LoadRatedMovies
 }
 
 const Movie: React.FC<Props> = ({
@@ -34,6 +36,7 @@ const Movie: React.FC<Props> = ({
   addToWatchList,
   addRating,
   removeRating,
+  loadRatedMovies,
 }) => {
   const { getCurrentSession } = useAppContext()
 
@@ -58,7 +61,15 @@ const Movie: React.FC<Props> = ({
       const session_id = getCurrentSession?.()
 
       if (!session_id) return
-      const { results } = await loadWatchList.load({ session_id: session_id })
+      const [{ results }, { results: ratedMovies }] = await Promise.all([
+        loadWatchList.load({ session_id }),
+        loadRatedMovies.load({ session_id }),
+      ])
+
+      if (ratedMovies.map(movie => movie.id).includes(details.id)) {
+        const findMovie = ratedMovies.filter(movie => movie.id === details.id)
+        setRating(findMovie[0].rating)
+      }
 
       if (results.map(item => item.id).includes(details.id!))
         setOnWatchList(true)
@@ -91,8 +102,8 @@ const Movie: React.FC<Props> = ({
   const handleRating = async (rating: number) => {
     console.log(rating)
     try {
-      await addRating.rate({ value: rating * 2 })
-      setRating(rating * 2)
+      await addRating.rate({ value: rating })
+      setRating(rating)
     } catch (error) {
       setError(true)
     }

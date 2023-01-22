@@ -6,12 +6,12 @@ export interface LoadRatedMovies {
 
 export namespace LoadRatedMovies {
   export type Model = {
-    results: Array<Movie.Model>
+    results: Array<Movie.Model & { rating: number }>
     page: number
     total_pages: number
     total_results: number
   }
   export type Params = {
-    sessionId: TemplateStringsArray
+    session_id: string
   }
 }

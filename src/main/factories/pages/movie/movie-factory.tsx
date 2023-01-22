@@ -4,6 +4,7 @@ import {
 } from '@/main/factories/usecases'
 import {
   makeRemoteDeleteRating,
+  makeRemoteLoadRatedMovies,
   makeRemoteRateMovie,
 } from '@/main/factories/usecases/rating'
 import {
@@ -30,6 +31,7 @@ export const MakeMoviePage: React.FC = () => {
       addToWatchList={makeRemoteAddToWatchList(account_id)}
       addRating={makeRemoteRateMovie(movieId!)}
       removeRating={makeRemoteDeleteRating(movieId!)}
+      loadRatedMovies={makeRemoteLoadRatedMovies(account_id)}
     />
   )
 }
