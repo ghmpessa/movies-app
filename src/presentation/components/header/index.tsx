@@ -11,6 +11,7 @@ import {
 
 import { Link } from 'react-router-dom'
 import { Menu, NavBar } from './components'
+import Feedback, { FeedbackType } from '../feedback'
 
 type Props = {
   requestToken: RequestToken
@@ -36,6 +37,11 @@ const Header: React.FC<Props> = ({
 
   const [isLogged, setIsLogged] = useState(getCurrentSession?.() ? true : false)
   const [showHamburger, setShowHamburger] = useState(false)
+  const [feedback, setFeedback] = useState<FeedbackType>({
+    message: '',
+    type: 'success',
+    open: false,
+  })
 
   const handleRequest = async () => {
     try {
@@ -46,7 +52,11 @@ const Header: React.FC<Props> = ({
         '_blank'
       )
     } catch (error) {
-      console.log(error)
+      setFeedback({
+        message: 'Something went wrong',
+        type: 'error',
+        open: true,
+      })
     }
   }
 
@@ -61,7 +71,11 @@ const Header: React.FC<Props> = ({
       setRequestToken?.(null)
       window.location.reload()
     } catch (error) {
-      console.log(error)
+      setFeedback({
+        message: 'Something went wrong',
+        type: 'error',
+        open: true,
+      })
     }
   }
 
@@ -80,8 +94,17 @@ const Header: React.FC<Props> = ({
         username: '',
       })
       setIsLogged(false)
+      setFeedback({
+        message: 'You logged out',
+        type: 'success',
+        open: true,
+      })
     } catch (error) {
-      console.log(error)
+      setFeedback({
+        message: 'Error on logout',
+        type: 'error',
+        open: true,
+      })
     }
   }
 
@@ -132,6 +155,18 @@ const Header: React.FC<Props> = ({
           handleRequest={handleRequest}
         />
       )}
+      <Feedback
+        message={feedback.message}
+        open={feedback.open}
+        type={feedback.type}
+        closeFeedback={() =>
+          setFeedback({
+            message: '',
+            type: 'success',
+            open: false,
+          })
+        }
+      />
     </Styled.Container>
   )
 }

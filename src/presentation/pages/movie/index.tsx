@@ -4,7 +4,9 @@ import { BackdropSection, CastSection, DetailsSection } from './components'
 
 import { useAppContext } from '@/presentation/contexts'
 
-import { Error, Loading } from '@/presentation/components'
+import { Error, Loading, Feedback } from '@/presentation/components'
+import { FeedbackType } from '@/presentation/components/feedback'
+
 import {
   AddToWatchList,
   DeleteRating,
@@ -47,8 +49,14 @@ const Movie: React.FC<Props> = ({
   const [rating, setRating] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [feedback, setFeedback] = useState<FeedbackType>({
+    message: '',
+    type: 'success',
+    open: false,
+  })
 
   const fetchMovie = async () => {
+    setError(false)
     try {
       const [details, { cast }, { backdrops }] = await Promise.all([
         loadMovieDetails.load(),
@@ -92,20 +100,41 @@ const Movie: React.FC<Props> = ({
         media_type: 'movie',
         watchlist,
       })
+      setFeedback({
+        message: watchlist
+          ? 'Added to your watchlist'
+          : `Removed ${details!.title} from your watchlist `,
+        open: true,
+        type: 'success',
+      })
     } catch (error) {
-      setError(true)
+      setFeedback({
+        message: watchlist
+          ? 'Error while adding to watchlist'
+          : 'Error while removing to watchlist',
+        open: true,
+        type: 'error',
+      })
     } finally {
       setOnWatchList(p => !p)
     }
   }
 
   const handleRating = async (rating: number) => {
-    console.log(rating)
     try {
       await addRating.rate({ value: rating })
       setRating(rating)
+      setFeedback({
+        message: 'Rating added!',
+        open: true,
+        type: 'success',
+      })
     } catch (error) {
-      setError(true)
+      setFeedback({
+        message: 'Error during rating',
+        open: true,
+        type: 'error',
+      })
     }
   }
 
@@ -114,14 +143,28 @@ const Movie: React.FC<Props> = ({
       if (rating === 0) return
       await removeRating.delete()
       setRating(0)
+      setFeedback({
+        message: 'Rating removed',
+        open: true,
+        type: 'success',
+      })
     } catch (error) {
-      setError(true)
+      setFeedback({
+        message: 'Error during rating remove',
+        open: true,
+        type: 'error',
+      })
     }
   }
 
   useEffect(() => {
+    let isMounted = true
     window.scrollTo(0, 0)
-    fetchMovie()
+    if (isMounted) fetchMovie()
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   return (
@@ -153,6 +196,18 @@ const Movie: React.FC<Props> = ({
           <BackdropSection images={images} title={details.title} />
         </>
       )}
+      <Feedback
+        message={feedback.message}
+        open={feedback.open}
+        type={feedback.type}
+        closeFeedback={() =>
+          setFeedback({
+            message: '',
+            type: 'success',
+            open: false,
+          })
+        }
+      />
     </Styled.Container>
   )
 }
