@@ -1,14 +1,25 @@
 import { styled, Button as MUIButton } from '@mui/material'
 
 export namespace MovieListStyles {
-  export const Container = styled('div')`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+  type ContainerProps = {
+    isEmpty?: boolean
+  }
+  export const Container = styled('div')<ContainerProps>`
+    flex-grow: 1;
+    margin: auto;
     width: 100%;
     max-width: 1500px;
+    display: flex;
+    justify-content: ${({ isEmpty }) => (isEmpty ? 'center' : 'space-between')};
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+
+    @media (max-width: 760px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   `
 
   export const EmptyList = styled('div')`
@@ -16,6 +27,8 @@ export namespace MovieListStyles {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    align-self: flex-start;
+    text-align: center;
 
     h3 {
       font-size: 1.5rem;

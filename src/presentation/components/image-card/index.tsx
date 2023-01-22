@@ -4,11 +4,12 @@ import { ImageCardStyles as Styled } from './styles'
 type Props = {
   src: string
   title?: string
+  isLast?: boolean
 }
 
-const ImageCard: React.FC<Props> = ({ src, title }) => {
+const ImageCard: React.FC<Props> = ({ src, title, isLast }) => {
   return (
-    <Styled.Container>
+    <Styled.Container className={isLast ? 'last' : ''}>
       <Styled.Image src={src} alt={title} />
     </Styled.Container>
   )

@@ -8,11 +8,13 @@ export namespace ImageListStyles {
     display: flex;
     flex: 1;
 
-    padding: 0;
-    margin: 0;
+    border-radius: 8px;
+
+    padding-bottom: 12px;
 
     scrollbar-width: thin;
     scrollbar-color: #6969dd #e0e0e0;
+
     ::-webkit-scrollbar {
       width: 12px;
       height: 8px;

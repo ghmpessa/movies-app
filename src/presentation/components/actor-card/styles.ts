@@ -1,22 +1,28 @@
 import { styled } from '@mui/material'
 
-export namespace CastCardStyles {
+export namespace ActorCard {
   export const Container = styled('div')`
     height: 300px;
-    width: 250px;
+    width: 150px;
+
+    flex: 1 0 auto;
+
+    margin-right: 20px;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
 
     background-color: ${({ theme }) => theme.palette.background.paper};
 
     border-radius: 8px;
 
-    margin: 1.5rem;
     overflow: hidden;
-    text-align: center;
     box-shadow: ${({ theme }) => theme.shadows[1]};
+
+    &.last {
+      margin: 0;
+    }
   `
 
   type ImageProps = {

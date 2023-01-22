@@ -13,9 +13,10 @@ const ImageList: React.FC<Props> = ({ images }) => {
   console.log(`${prefix}${images[0].file_path}`)
   return (
     <Styled.Container>
-      {images.map(image => (
+      {images.map((image, index) => (
         <ImageCard
           src={`${prefix}${image.file_path}`}
+          isLast={index === images.length - 1}
           key={image.file_path + Math.random()}
         />
       ))}

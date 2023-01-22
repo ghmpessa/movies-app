@@ -11,7 +11,7 @@ type Props = {
 const MovieList: React.FC<Props> = ({ movies }) => {
   const navigate = useNavigate()
   return (
-    <Styled.Container>
+    <Styled.Container isEmpty={movies.length === 0}>
       {movies.length > 0 ? (
         movies.map(movie => (
           <MovieCard key={movie.id! * Math.random()} movie={movie} />

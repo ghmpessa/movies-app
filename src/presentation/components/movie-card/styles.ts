@@ -13,7 +13,8 @@ export namespace MovieCardStyles {
 
     border-radius: 8px;
 
-    margin: 1.5rem;
+    margin-bottom: 3rem;
+
     overflow: hidden;
     text-align: center;
     box-shadow: ${({ theme }) => theme.shadows[1]};

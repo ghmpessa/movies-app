@@ -6,8 +6,8 @@ export namespace HomePageStyles {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: flex-start;
+    align-items: center;
   `
 
   export const LoadingContainer = styled('div')`

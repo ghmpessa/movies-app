@@ -14,14 +14,32 @@ export namespace HeaderStyles {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px calc((100% - 1500px) / 2);
-
-    margin: 0 auto;
+    padding: 0px calc((100% - 1460px) / 2);
 
     background-color: ${({ theme: { palette } }) => palette.background.paper};
     box-shadow: 0px 2px 2px rgba(31, 0, 2, 0.25);
 
     z-index: 10000;
+
+    @media (max-width: 1500px) {
+      padding: 0px 20px;
+    }
+
+    @media (max-width: 1280px) {
+      padding: 0px 80px;
+    }
+
+    @media (max-width: 859px) {
+      padding: 0px 100px;
+    }
+
+    @media (max-width: 500px) {
+      padding: 0px 20px;
+    }
+
+    @media (max-width: 281px) {
+      padding: 0px 10px;
+    }
   `
 
   export const LogoContainer = styled('div')`
@@ -30,7 +48,6 @@ export namespace HeaderStyles {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 1.8rem;
 
     a {
       font-weight: 600;
@@ -57,7 +74,6 @@ export namespace HeaderStyles {
   export const NavContainer = styled('nav')`
     display: flex;
     align-items: center;
-    justify-content: space-between;
   `
 
   export const NavLinkContainer = styled(Link)`
@@ -65,7 +81,8 @@ export namespace HeaderStyles {
     align-items: center;
     justify-content: center;
     padding: 10px 0px;
-    margin: 0 1.8rem;
+    margin: 0;
+    margin-left: 40px;
     position: relative;
     text-decoration: none;
 
@@ -113,7 +130,6 @@ export namespace HeaderStyles {
     justify-content: center;
     align-items: center;
     margin-left: 40px;
-    margin-right: 1.8rem;
     font-family: 'Raleway';
   `
 }

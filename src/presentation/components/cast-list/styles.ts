@@ -1,32 +1,27 @@
-import { styled, Button as MUIButton } from '@mui/material'
+import { styled } from '@mui/material'
 
 export namespace CastListStyles {
   export const Container = styled('div')`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
     width: 100%;
-    max-width: 1500px;
-  `
-
-  export const EmptyList = styled('div')`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    flex: 1;
 
-    h3 {
-      font-size: 1.5rem;
-      margin: 5px;
-      font-weight: 500;
+    padding-bottom: 12px;
+
+    justify-content: space-between;
+
+    scrollbar-width: thin;
+    scrollbar-color: #6969dd #e0e0e0;
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 8px;
     }
-  `
 
-  export const Button = styled(MUIButton)`
-    width: 200px;
-    padding: 12px 24px;
-    margin: 2rem;
+    ::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.palette.secondary.dark};
+      border-radius: 1000px;
+    }
   `
 }

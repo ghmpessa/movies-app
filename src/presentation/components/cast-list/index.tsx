@@ -12,19 +12,13 @@ const CastList: React.FC<Props> = ({ cast }) => {
   const navigate = useNavigate()
   return (
     <Styled.Container>
-      {cast.length > 0 ? (
-        cast.map(actor => (
-          <ActorCard key={actor.id! * Math.random()} actor={actor} />
-        ))
-      ) : (
-        <Styled.EmptyList>
-          <h3>Your watchlist is empty</h3>
-          <h3>Show us some movies you want to watch</h3>
-          <Styled.Button variant='contained' onClick={() => navigate('/')}>
-            Go to movies
-          </Styled.Button>
-        </Styled.EmptyList>
-      )}
+      {cast.map((actor, index) => (
+        <ActorCard
+          key={actor.id! * Math.random()}
+          actor={actor}
+          isLast={index === cast.length - 1}
+        />
+      ))}
     </Styled.Container>
   )
 }
