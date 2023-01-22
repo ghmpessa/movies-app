@@ -13,15 +13,17 @@ import { getCurrentAccount } from '@/main/adapters'
 
 export const MakeMoviePage: React.FC = () => {
   const { movieId } = useParams()
-  const { id } = getCurrentAccount?.()
+  const account = getCurrentAccount?.()
+
+  const account_id = account.id === 0 ? '' : account.id.toString()
 
   return (
     <MoviePage
       loadMovieDetails={makeRemoteLoadMovieDetails(movieId!)}
       loadMovieCast={makeRemoteLoadMovieCast(movieId!)}
       loadMovieImages={makeRemoteLoadMovieImages(movieId!)}
-      loadWatchList={makeRemoteLoadWatchList(id!)}
-      addToWatchList={makeRemoteAddToWatchList(id!)}
+      loadWatchList={makeRemoteLoadWatchList(account_id)}
+      addToWatchList={makeRemoteAddToWatchList(account_id)}
     />
   )
 }
