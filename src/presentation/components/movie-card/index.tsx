@@ -26,10 +26,9 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
   const day = movie.release_date!.slice(8)
   const month = movie.release_date!.slice(5, 7)
   const year = movie.release_date!.slice(0, 4)
-  const releaseDate = format(
-    new Date([month, day, year].join('-')),
-    'MMMM dd, yyyy'
-  )
+  const releaseDate = movie.release_date
+    ? format(new Date([month, day, year].join('-')), 'MMMM dd, yyyy')
+    : '-'
 
   return (
     <Styled.Container onClick={() => navigate(`/${movie.id}`)}>
