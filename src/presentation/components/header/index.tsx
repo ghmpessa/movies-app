@@ -75,7 +75,11 @@ const Header: React.FC<Props> = ({
       if (!session_id) return
       await deleteSession.delete({ session_id })
       setCurrentSession?.(null)
-      setCurrentAccount?.(null)
+      setCurrentAccount?.({
+        id: 0,
+        name: '',
+        username: '',
+      })
       setIsLogged(false)
     } catch (error) {
       console.log(error)
