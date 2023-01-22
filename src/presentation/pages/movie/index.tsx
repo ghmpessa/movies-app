@@ -9,6 +9,7 @@ import {
   LoadMovieDetails,
   LoadMovieImages,
   LoadWatchList,
+  RateMovie,
 } from '@/domain/usecases'
 import { Cast, Image } from '@/domain/models'
 import { useAppContext } from '@/presentation/contexts'
@@ -19,6 +20,7 @@ type Props = {
   loadMovieImages: LoadMovieImages
   loadWatchList: LoadWatchList
   addToWatchList: AddToWatchList
+  addRating: RateMovie
 }
 
 const Movie: React.FC<Props> = ({
@@ -27,6 +29,7 @@ const Movie: React.FC<Props> = ({
   loadMovieImages,
   loadWatchList,
   addToWatchList,
+  addRating,
 }) => {
   const { getCurrentSession } = useAppContext()
 
@@ -34,6 +37,7 @@ const Movie: React.FC<Props> = ({
   const [cast, setCast] = useState<Cast.Model[]>([])
   const [images, setImages] = useState<Image.Model[]>([])
   const [onWatchList, setOnWatchList] = useState(false)
+  const [rating, setRating] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
@@ -48,7 +52,9 @@ const Movie: React.FC<Props> = ({
       setCast(cast)
       setImages(backdrops)
       const session_id = getCurrentSession?.()
-      const { results } = await loadWatchList.load({ session_id: session_id! })
+
+      if (!session_id) return
+      const { results } = await loadWatchList.load({ session_id: session_id })
 
       if (results.map(item => item.id).includes(details.id!))
         setOnWatchList(true)
@@ -62,8 +68,9 @@ const Movie: React.FC<Props> = ({
   const handleAddToWatchList = async () => {
     const session_id = getCurrentSession?.()
     const watchlist = onWatchList ? false : true
+
+    if (!session_id) return
     try {
-      if (!session_id) return
       await addToWatchList.add({
         session_id,
         media_id: details!.id!,
@@ -71,8 +78,18 @@ const Movie: React.FC<Props> = ({
         watchlist,
       })
     } catch (error) {
+      setError(true)
     } finally {
       setOnWatchList(p => !p)
+    }
+  }
+
+  const handleRating = async (rating: number) => {
+    try {
+      await addRating.rate({ value: rating * 2 })
+      setRating(rating)
+    } catch (error) {
+      setError(true)
     }
   }
 
@@ -102,6 +119,8 @@ const Movie: React.FC<Props> = ({
             details={details}
             isOnWatchList={onWatchList}
             onAddToWatchList={handleAddToWatchList}
+            rating={rating}
+            onRating={handleRating}
           />
           <CastSection cast={cast} />
           <BackdropSection images={images} title={details.title} />

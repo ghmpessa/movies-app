@@ -1,5 +1,4 @@
 import { keyframes, styled, Fab as MUIFab } from '@mui/material'
-
 export namespace DetailsSectionStyles {
   export const Container = styled('section')`
     background-color: ${({ theme }) => theme.palette.background.paper};
@@ -12,6 +11,14 @@ export namespace DetailsSectionStyles {
 
     @media (max-width: 768px) {
       flex-direction: column;
+    }
+  `
+
+  export const RatingContainer = styled('div')`
+    margin-bottom: 1rem;
+
+    &:hover {
+      cursor: pointer;
     }
   `
 
@@ -58,7 +65,7 @@ export namespace DetailsSectionStyles {
       font-size: 1rem;
       font-weight: 500;
       color: ${({ theme }) => theme.palette.secondary.light};
-      margin: 0px 0px 20px;
+      margin: 0px;
     }
 
     @media (max-width: 992px) {
@@ -100,7 +107,7 @@ export namespace DetailsSectionStyles {
     }
   `
 
-  type ButtonProps = { isOnWatchList?: boolean }
+  type ButtonProps = { title?: string }
 
   export const Button = styled(MUIFab)<ButtonProps>`
     display: flex;
@@ -117,12 +124,11 @@ export namespace DetailsSectionStyles {
     }
 
     &:hover:after {
-      content: ${({ isOnWatchList }) =>
-        isOnWatchList ? '"Remove from watchlist"' : '"Add to watchlist"'};
+      content: ${({ title }) => `"${title}"`};
       align-self: center;
       margin-left: 24px;
       position: absolute;
-      width: 200px;
+      width: 170px;
 
       color: ${({ theme }) => theme.palette.common.white};
 

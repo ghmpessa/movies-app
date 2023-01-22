@@ -1,15 +1,16 @@
-import { MoviePage } from '@/presentation/pages'
-import { useParams } from 'react-router-dom'
+import {
+  makeRemoteAddToWatchList,
+  makeRemoteLoadWatchList,
+} from '@/main/factories/usecases'
+import { makeRemoteRateMovie } from '@/main/factories/usecases/rating'
 import {
   makeRemoteLoadMovieCast,
   makeRemoteLoadMovieDetails,
   makeRemoteLoadMovieImages,
 } from '@/main/factories/usecases/movies'
-import {
-  makeRemoteAddToWatchList,
-  makeRemoteLoadWatchList,
-} from '../../usecases'
 import { getCurrentAccount } from '@/main/adapters'
+import { MoviePage } from '@/presentation/pages'
+import { useParams } from 'react-router-dom'
 
 export const MakeMoviePage: React.FC = () => {
   const { movieId } = useParams()
@@ -24,6 +25,7 @@ export const MakeMoviePage: React.FC = () => {
       loadMovieImages={makeRemoteLoadMovieImages(movieId!)}
       loadWatchList={makeRemoteLoadWatchList(account_id)}
       addToWatchList={makeRemoteAddToWatchList(account_id)}
+      addRating={makeRemoteRateMovie(movieId!)}
     />
   )
 }

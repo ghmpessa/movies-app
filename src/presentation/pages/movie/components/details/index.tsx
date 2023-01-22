@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DetailsSectionStyles as Styled } from './styles'
 import { LoadMovieDetails } from '@/domain/usecases'
 
@@ -8,20 +8,30 @@ import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded'
 import ConfirmationNumberRoundedIcon from '@mui/icons-material/ConfirmationNumberRounded'
 import RequestQuoteRoundedIcon from '@mui/icons-material/RequestQuoteRounded'
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove'
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 
 import { format } from 'date-fns'
+import { useTheme } from '@mui/material'
+import { Rating } from '@mui/material'
 
 type Props = {
   details: LoadMovieDetails.Model
   onAddToWatchList?: () => void
   isOnWatchList?: boolean
+  rating: number
+  onRating: (rating: number) => void
 }
 
 const DetailsSection: React.FC<Props> = ({
   details,
   onAddToWatchList,
   isOnWatchList,
+  rating,
+  onRating,
 }) => {
+  const { palette } = useTheme()
+
   // format date
   const day = details.release_date!.slice(8)
   const month = details.release_date!.slice(5, 7)
@@ -59,13 +69,33 @@ const DetailsSection: React.FC<Props> = ({
               variant='circular'
               color={isOnWatchList ? 'success' : 'primary'}
               onClick={onAddToWatchList}
-              isOnWatchList={isOnWatchList}
+              title={
+                isOnWatchList ? 'Remove from watchlist' : 'Add to watchlist'
+              }
             >
               {!isOnWatchList && <BookmarkAddRoundedIcon />}
               {isOnWatchList && <BookmarkRemoveIcon sx={{ color: 'white' }} />}
             </Styled.Button>
           </Styled.HeaderButtonsContainer>
         </Styled.HeaderContainer>
+
+        <Styled.RatingContainer>
+          <Rating
+            value={rating / 2}
+            onChange={(_, rating) => onRating(rating!)}
+            readOnly={rating > 0}
+            icon={
+              <FavoriteRoundedIcon
+                sx={{ width: 32, height: 32 }}
+                color='primary'
+              />
+            }
+            emptyIcon={
+              <FavoriteBorderRoundedIcon sx={{ width: 32, height: 32 }} />
+            }
+          />
+        </Styled.RatingContainer>
+
         <Styled.MainInfosContainer>
           <h3>overview</h3>
           <p>{details.overview}</p>
