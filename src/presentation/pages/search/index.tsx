@@ -8,7 +8,7 @@ import {
   MovieList,
 } from '@/presentation/components'
 import { LoadMovies, SearchMovies } from '@/domain/usecases'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 type Props = {
   searchMovies: SearchMovies
@@ -16,6 +16,7 @@ type Props = {
 
 const SearchPage: React.FC<Props> = ({ searchMovies }) => {
   const { query } = useParams()
+  const navigate = useNavigate()
   const [data, setData] = useState<LoadMovies.Model>({
     results: [],
     page: 1,
@@ -28,10 +29,10 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
   const showLoadMore =
     !loading && data.results.length > 0 && data.total_pages !== data.page
 
-  const fetchMovies = async (page = 1) => {
+  const fetchMovies = async (page = 1, text = '') => {
     setError(false)
     try {
-      const response = await searchMovies.search({ query: query || '', page })
+      const response = await searchMovies.search({ query: query || text, page })
 
       setData({
         ...response,
@@ -64,7 +65,7 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
             title: 'This movie is not released yet',
             buttonTitle: 'Clear search',
           }}
-          handleClick={() => fetchMovies()}
+          handleClick={() => navigate('/')}
         />
       )}
       {!loading && error && (
