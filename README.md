@@ -11,6 +11,10 @@ git clone https://github.com/ghmpessa/movies-app.git
 # Open folder
 cd movies-app
 
+# Create .env and add its variables
+create .env file using the variables as presented on .env.example,
+following its instructions
+
 # Install dependencies
 npm install
 
