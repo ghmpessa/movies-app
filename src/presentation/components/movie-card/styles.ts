@@ -17,7 +17,9 @@ export namespace MovieCardStyles {
     overflow: hidden;
     text-align: center;
     box-shadow: ${({ theme }) => theme.shadows[1]};
-    transition: transform 0.2s cubic-bezier(0.095, 0.79, 0.88, 1.535);
+
+    transition: transform 0.2s cubic-bezier(0.095, 0.79, 0.88, 1.535),
+      all 0.4s ease-in;
 
     &:hover {
       cursor: pointer;

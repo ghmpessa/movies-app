@@ -6,6 +6,7 @@ import {
   ScrollToTopFab,
   Loading,
   MovieList,
+  MovieListsHeader,
 } from '@/presentation/components'
 import { LoadMovies } from '@/domain/usecases'
 
@@ -23,8 +24,12 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
+  const showLoadMore =
+    !loading && data.results.length > 0 && data.total_pages !== data.page
+
   const fetchMovies = useCallback(
     async (page = 1) => {
+      setError(false)
       try {
         const response = await loadMovies.load({ page })
 
@@ -53,14 +58,31 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
 
   return (
     <Styled.Container>
+      <MovieListsHeader />
       {loading && (
         <Styled.LoadingContainer>
           <Loading />
         </Styled.LoadingContainer>
       )}
-      {!loading && !error && <MovieList movies={data ? data.results : []} />}
-      {!loading && error && <Error />}
-      {!loading && (
+      {!loading && !error && (
+        <MovieList
+          movies={data ? data.results : []}
+          emptyList={{
+            title: 'This movie is not released yet',
+            buttonTitle: 'Clear search',
+          }}
+          handleClick={() => fetchMovies()}
+        />
+      )}
+      {!loading && error && (
+        <Error
+          onTryAgain={() => {
+            setLoading(true)
+            fetchMovies()
+          }}
+        />
+      )}
+      {showLoadMore && (
         <Styled.LoadMore
           variant='contained'
           color='primary'

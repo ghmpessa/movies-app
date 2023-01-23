@@ -1,3 +1,8 @@
 export { default as Home } from './home'
+export { default as Upcoming } from './upcoming'
+export { default as OnTheaters } from './on-theaters'
+export { default as TopRated } from './top-rated'
+export { default as Popular } from './popular'
 export { default as WatchList } from './watch-list'
+export { default as SearchPage } from './search'
 export { default as MoviePage } from './movie'
