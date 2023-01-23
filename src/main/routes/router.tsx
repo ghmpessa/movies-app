@@ -36,6 +36,8 @@ const Router: React.FC = () => {
       />
       <MainContainer>
         <Routes>
+          <Route path='/:movieId' element={<MakeMoviePage />} />
+          <Route path='/:id/watchlist' element={<MakeWatchList />} />
           <Route path='/' element={<MoviesHeader />}>
             <Route index element={<MakeMovies />} />
             <Route path='upcoming' element={<MakeUpcoming />} />
@@ -44,8 +46,6 @@ const Router: React.FC = () => {
             <Route path='popular' element={<MakePopular />} />
             <Route path='top_rated' element={<MakeTopRated />} />
           </Route>
-          <Route path='/:movieId' element={<MakeMoviePage />} />
-          <Route path='/:id/watchlist' element={<MakeWatchList />} />
           <Route path='*' element={<Navigate to='/' />} />
         </Routes>
       </MainContainer>
