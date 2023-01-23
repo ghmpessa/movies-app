@@ -9,7 +9,16 @@ import {
 import { Footer, Header, MainContainer } from '@/presentation/components'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { MakeHome, MakeWatchList, MakeMoviePage } from '@/main/factories/pages'
+import {
+  MakeHome,
+  MakeWatchList,
+  MakeMoviePage,
+  MakeUpcoming,
+  MakeOnTheaters,
+  MakePopular,
+  MakeTopRated,
+  MakeSearchPage,
+} from '@/main/factories/pages'
 
 const Router: React.FC = () => {
   return (
@@ -22,9 +31,14 @@ const Router: React.FC = () => {
       />
       <MainContainer>
         <Routes>
-          <Route path='/' element={<MakeHome />} />
+          <Route path='/upcoming' element={<MakeUpcoming />} />
+          <Route path='/search/:query' element={<MakeSearchPage />} />
+          <Route path='/on_theaters' element={<MakeOnTheaters />} />
+          <Route path='/popular' element={<MakePopular />} />
+          <Route path='/top_rated' element={<MakeTopRated />} />
           <Route path='/:movieId' element={<MakeMoviePage />} />
           <Route path='/:id/watchlist' element={<MakeWatchList />} />
+          <Route path='/' element={<MakeHome />} />
         </Routes>
       </MainContainer>
       <Footer />
