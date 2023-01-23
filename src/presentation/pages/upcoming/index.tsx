@@ -1,35 +1,37 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { WathlistStyles as Styled } from './styles'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
+import { UpcomingStyles as Styled } from './styles'
 
 import {
   Error,
   ScrollToTopFab,
   Loading,
   MovieList,
+  MovieListsHeader,
 } from '@/presentation/components'
-import { LoadWatchList } from '@/domain/usecases'
-import { getCurrentSession } from '@/main/adapters'
+import { LoadMovies } from '@/domain/usecases'
 
 type Props = {
-  loadWatchList: LoadWatchList
+  loadMovies: LoadMovies
 }
 
-const WatchList: React.FC<Props> = ({ loadWatchList }) => {
-  const [data, setData] = useState<LoadWatchList.Model>({
+const HomePage: React.FC<Props> = ({ loadMovies }) => {
+  const [data, setData] = useState<LoadMovies.Model>({
     results: [],
     page: 1,
-    total_pages: 1,
+    total_pages: 0,
     total_results: 0,
   })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const session_id = getCurrentSession?.()
+
+  const showLoadMore =
+    !loading && data.results.length > 0 && data.total_pages !== data.page
 
   const fetchMovies = useCallback(
     async (page = 1) => {
       setError(false)
       try {
-        const response = await loadWatchList.load({ session_id, page })
+        const response = await loadMovies.load({ page })
 
         setData({
           ...response,
@@ -46,6 +48,7 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
 
   useEffect(() => {
     let isMounted = true
+
     if (isMounted) fetchMovies()
 
     return () => {
@@ -54,8 +57,8 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
   }, [])
 
   return (
-    <Styled.Container isEmpty={data.results.length === 0}>
-      <Styled.Title>my watchlist</Styled.Title>
+    <Styled.Container>
+      <MovieListsHeader />
       {loading && (
         <Styled.LoadingContainer>
           <Loading />
@@ -63,11 +66,12 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
       )}
       {!loading && !error && (
         <MovieList
-          movies={data.results}
+          movies={data ? data.results : []}
           emptyList={{
-            title: 'Your watchlist is empty',
-            buttonTitle: 'Go to movies',
+            title: 'This movie is not released yet',
+            buttonTitle: 'Clear search',
           }}
+          handleClick={() => fetchMovies()}
         />
       )}
       {!loading && error && (
@@ -78,20 +82,18 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
           }}
         />
       )}
+      {showLoadMore && (
+        <Styled.LoadMore
+          variant='contained'
+          color='primary'
+          onClick={() => fetchMovies(data.page + 1)}
+        >
+          Load more
+        </Styled.LoadMore>
+      )}
       <ScrollToTopFab />
-      {!loading &&
-        data.page !== data.total_pages &&
-        data.results.length > 0 && (
-          <Styled.LoadMore
-            variant='contained'
-            color='primary'
-            onClick={() => fetchMovies(data.page + 1)}
-          >
-            Load more
-          </Styled.LoadMore>
-        )}
     </Styled.Container>
   )
 }
 
-export default WatchList
+export default HomePage
