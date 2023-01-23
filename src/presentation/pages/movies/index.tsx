@@ -57,11 +57,7 @@ const HomePage: React.FC<Props> = ({ loadMovies }) => {
 
   return (
     <Styled.Container>
-      {loading && (
-        <Styled.LoadingContainer>
-          <Loading />
-        </Styled.LoadingContainer>
-      )}
+      {loading && <Loading />}
       {!loading && !error && (
         <MovieList
           movies={data ? data.results : []}

@@ -26,15 +26,6 @@ export namespace WathlistStyles {
     margin: 3rem 0 0 0;
   `
 
-  export const LoadingContainer = styled('div')`
-    flex: 1;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 115px - 7rem);
-  `
-
   export const LoadMore = styled(MUIButton)`
     width: 150px;
     align-self: center;

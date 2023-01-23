@@ -29,6 +29,7 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
     !loading && data.results.length > 0 && data.total_pages !== data.page
 
   const fetchMovies = async (page = 1) => {
+    setError(false)
     try {
       const response = await searchMovies.search({ query: query || '', page })
 
@@ -55,11 +56,7 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
 
   return (
     <Styled.Container>
-      {loading && (
-        <Styled.LoadingContainer>
-          <Loading />
-        </Styled.LoadingContainer>
-      )}
+      {loading && <Loading />}
       {!loading && !error && (
         <MovieList
           movies={data ? data.results : []}

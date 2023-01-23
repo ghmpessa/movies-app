@@ -169,11 +169,7 @@ const Movie: React.FC<Props> = ({
 
   return (
     <Styled.Container>
-      {loading && (
-        <Styled.LoadingContainer>
-          <Loading />
-        </Styled.LoadingContainer>
-      )}
+      {loading && <Loading />}
       {!loading && error && (
         <Error
           onTryAgain={() => {

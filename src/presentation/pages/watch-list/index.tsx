@@ -25,6 +25,9 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
   const [error, setError] = useState(false)
   const session_id = getCurrentSession?.()
 
+  const showLoadMore =
+    !loading && data.results.length > 0 && data.total_pages !== data.page
+
   const fetchMovies = useCallback(
     async (page = 1) => {
       setError(false)
@@ -56,11 +59,7 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
   return (
     <Styled.Container isEmpty={data.results.length === 0}>
       <Styled.Title>my watchlist</Styled.Title>
-      {loading && (
-        <Styled.LoadingContainer>
-          <Loading />
-        </Styled.LoadingContainer>
-      )}
+      {loading && <Loading />}
       {!loading && !error && (
         <MovieList
           movies={data.results}
@@ -79,17 +78,15 @@ const WatchList: React.FC<Props> = ({ loadWatchList }) => {
         />
       )}
       <ScrollToTopFab />
-      {!loading &&
-        data.page !== data.total_pages &&
-        data.results.length > 0 && (
-          <Styled.LoadMore
-            variant='contained'
-            color='primary'
-            onClick={() => fetchMovies(data.page + 1)}
-          >
-            Load more
-          </Styled.LoadMore>
-        )}
+      {showLoadMore && (
+        <Styled.LoadMore
+          variant='contained'
+          color='primary'
+          onClick={() => fetchMovies(data.page + 1)}
+        >
+          Load more
+        </Styled.LoadMore>
+      )}
     </Styled.Container>
   )
 }

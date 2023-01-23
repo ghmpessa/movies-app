@@ -10,15 +10,6 @@ export namespace HomePageStyles {
     align-items: center;
   `
 
-  export const LoadingContainer = styled('div')`
-    flex: 1;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 115px);
-  `
-
   export const LoadMore = styled(MUIButton)`
     width: 150px;
     align-self: center;
