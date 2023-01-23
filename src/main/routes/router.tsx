@@ -10,7 +10,7 @@ import {
   Footer,
   Header,
   MainContainer,
-  MovieListsHeader,
+  MoviesHeader,
 } from '@/presentation/components'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -36,7 +36,7 @@ const Router: React.FC = () => {
       />
       <MainContainer>
         <Routes>
-          <Route path='/' element={<MovieListsHeader />}>
+          <Route path='/' element={<MoviesHeader />}>
             <Route index element={<MakeMovies />} />
             <Route path='upcoming' element={<MakeUpcoming />} />
             <Route path='search/:query' element={<MakeSearchPage />} />

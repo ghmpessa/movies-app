@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { MovieListsHeaderStyles as Styled } from './styles'
+import { MoviesHeaderStyles as Styled } from './styles'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import { useLocation, useNavigate, Outlet } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ type Props = {
   children?: React.ReactNode
 }
 
-const MovieListHeader: React.FC<Props> = ({ children }) => {
+const MoviesHeader: React.FC<Props> = ({ children }) => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
@@ -64,4 +64,4 @@ const MovieListHeader: React.FC<Props> = ({ children }) => {
   )
 }
 
-export default MovieListHeader
+export default MoviesHeader

@@ -5,7 +5,7 @@ import {
 } from '@mui/material'
 import { NavLink as RouterLink } from 'react-router-dom'
 
-export namespace MovieListsHeaderStyles {
+export namespace MoviesHeaderStyles {
   export const Container = styled('div')`
     display: flex;
     flex-direction: column;
