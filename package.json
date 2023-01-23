@@ -8,7 +8,7 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 9000",
     "typecheck": "tsc",
     "format:check": "npx prettier --check \"**/*.{js,jsx,json,ts,tsx}\"",
     "format": "npx prettier --write \"**/*.{js,jsx,json,ts,tsx}\""

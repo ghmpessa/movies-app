@@ -9,7 +9,7 @@ import {
   RequestToken,
 } from '@/domain/usecases'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Menu, NavBar } from './components'
 import Feedback, { FeedbackType } from '../feedback'
 
@@ -31,9 +31,10 @@ const Header: React.FC<Props> = ({
     setRequestToken,
     setCurrentSession,
     getCurrentSession,
-    getCurrentAccount,
     setCurrentAccount,
   } = useAppContext()
+
+  const navigate = useNavigate()
 
   const [isLogged, setIsLogged] = useState(getCurrentSession?.() ? true : false)
   const [showHamburger, setShowHamburger] = useState(false)
@@ -99,6 +100,7 @@ const Header: React.FC<Props> = ({
         type: 'success',
         open: true,
       })
+      navigate('/', { replace: true })
     } catch (error) {
       setFeedback({
         message: 'Error on logout',

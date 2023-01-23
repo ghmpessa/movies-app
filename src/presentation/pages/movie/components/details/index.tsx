@@ -107,9 +107,6 @@ const DetailsSection: React.FC<Props> = ({
             {details.genres?.map(genre => (
               <Styled.GenresCard key={genre.id}>{genre.name}</Styled.GenresCard>
             ))}
-            <Styled.GenresCard>{'Action'}</Styled.GenresCard>
-            <Styled.GenresCard>{'Comedy'}</Styled.GenresCard>
-            <Styled.GenresCard>{'Animation'}</Styled.GenresCard>
           </Styled.GenresContainer>
         </Styled.MainInfosContainer>
 
