@@ -1,6 +1,6 @@
-import { OnTheaters } from '@/presentation/pages'
 import { makeRemoteLoadMovies } from '@/main/factories/usecases/movies'
+import { Movies } from '@/presentation/pages'
 
 export const MakeOnTheaters: React.FC = () => {
-  return <OnTheaters loadMovies={makeRemoteLoadMovies('/movie/now_playing')} />
+  return <Movies loadMovies={makeRemoteLoadMovies('/movie/now_playing')} />
 }

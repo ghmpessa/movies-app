@@ -15,7 +15,7 @@ import {
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
-  MakeHome,
+  MakeMovies,
   MakeWatchList,
   MakeMoviePage,
   MakeUpcoming,
@@ -37,7 +37,7 @@ const Router: React.FC = () => {
       <MainContainer>
         <Routes>
           <Route path='/' element={<MovieListsHeader />}>
-            <Route index element={<MakeHome />} />
+            <Route index element={<MakeMovies />} />
             <Route path='upcoming' element={<MakeUpcoming />} />
             <Route path='search/:query' element={<MakeSearchPage />} />
             <Route path='on_theaters' element={<MakeOnTheaters />} />

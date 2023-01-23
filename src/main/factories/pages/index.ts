@@ -1,4 +1,4 @@
-export * from './home/home-factory'
+export * from './movies/movies-factory'
 export * from './top-rated/top-rated-factory'
 export * from './upcoming/upcoming-factory'
 export * from './search/search-factory'

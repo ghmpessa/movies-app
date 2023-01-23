@@ -1,6 +1,6 @@
-import { TopRated } from '@/presentation/pages'
 import { makeRemoteLoadMovies } from '@/main/factories/usecases/movies'
+import { Movies } from '@/presentation/pages'
 
 export const MakeTopRated: React.FC = () => {
-  return <TopRated loadMovies={makeRemoteLoadMovies('/movie/top_rated')} />
+  return <Movies loadMovies={makeRemoteLoadMovies('/movie/top_rated')} />
 }
