@@ -13,7 +13,7 @@ import {
   MoviesHeader,
 } from '@/presentation/components'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import {
   MakeMovies,
   MakeWatchList,
@@ -46,6 +46,7 @@ const Router: React.FC = () => {
           </Route>
           <Route path='/:movieId' element={<MakeMoviePage />} />
           <Route path='/:id/watchlist' element={<MakeWatchList />} />
+          <Route path='*' element={<Navigate to='/' />} />
         </Routes>
       </MainContainer>
       <Footer />
