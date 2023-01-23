@@ -32,13 +32,12 @@ const DetailsSection: React.FC<Props> = ({
   onRemoveRating,
 }) => {
   // format date
-  const day = details.release_date!.slice(8)
-  const month = details.release_date!.slice(5, 7)
-  const year = details.release_date!.slice(0, 4)
-  const releaseDate = format(
-    new Date([month, day, year].join('-')),
-    'MMMM dd, yyyy'
-  )
+  const day = details.release_date?.slice(8)
+  const month = details.release_date?.slice(5, 7)
+  const year = details.release_date?.slice(0, 4)
+  const releaseDate = details.release_date
+    ? format(new Date([month, day, year].join('-')), 'MMMM dd, yyyy')
+    : '-'
   // image url
   const prefix = 'https://image.tmdb.org/t/p/w300'
 
