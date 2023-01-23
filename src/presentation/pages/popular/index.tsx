@@ -6,7 +6,6 @@ import {
   ScrollToTopFab,
   Loading,
   MovieList,
-  MovieListsHeader,
 } from '@/presentation/components'
 import { LoadMovies } from '@/domain/usecases'
 
@@ -58,7 +57,6 @@ const Popular: React.FC<Props> = ({ loadMovies }) => {
 
   return (
     <Styled.Container>
-      <MovieListsHeader />
       {loading && (
         <Styled.LoadingContainer>
           <Loading />

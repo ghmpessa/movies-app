@@ -6,7 +6,6 @@ import {
   ScrollToTopFab,
   Loading,
   MovieList,
-  MovieListsHeader,
 } from '@/presentation/components'
 import { LoadMovies, SearchMovies } from '@/domain/usecases'
 import { useParams } from 'react-router-dom'
@@ -32,7 +31,11 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
   const fetchMovies = async (page = 1) => {
     try {
       const response = await searchMovies.search({ query: query || '', page })
-      setData(response)
+
+      setData({
+        ...response,
+        results: [...data.results, ...response.results],
+      })
     } catch (error) {
       setError(true)
     } finally {
@@ -52,7 +55,6 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
 
   return (
     <Styled.Container>
-      <MovieListsHeader />
       {loading && (
         <Styled.LoadingContainer>
           <Loading />
@@ -65,14 +67,14 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
             title: 'This movie is not released yet',
             buttonTitle: 'Clear search',
           }}
-          // handleClick={() => fetchMovies()}
+          handleClick={() => fetchMovies()}
         />
       )}
       {!loading && error && (
         <Error
           onTryAgain={() => {
             setLoading(true)
-            // fetchMovies()
+            fetchMovies()
           }}
         />
       )}
@@ -80,9 +82,7 @@ const SearchPage: React.FC<Props> = ({ searchMovies }) => {
         <Styled.LoadMore
           variant='contained'
           color='primary'
-          // onClick={() =>
-          //   query.length > 0 ? handleSearchMovie() : fetchMovies(data.page + 1)
-          // }
+          onClick={() => fetchMovies(data.page + 1)}
         >
           Load more
         </Styled.LoadMore>

@@ -3,10 +3,15 @@ import {
   Fab as MUIFab,
   OutlinedInput as MUITextField,
 } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { NavLink as RouterLink } from 'react-router-dom'
 
 export namespace MovieListsHeaderStyles {
   export const Container = styled('div')`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  `
+  export const HeaderContainer = styled('div')`
     display: flex;
     align-items: center;
     justify-content: space-between;
