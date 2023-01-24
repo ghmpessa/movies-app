@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { keyframes, styled } from '@mui/material'
 
 export namespace ImageCardStyles {
   export const Container = styled('div')`
@@ -13,6 +13,14 @@ export namespace ImageCardStyles {
     }
   `
 
+  const fadeIn = keyframes`
+    from {
+      opacity: 0;
+    } to {
+      opacity: 1;
+    }
+  `
+
   export const Image = styled('img')`
     width: 533px;
     min-width: 533px;
@@ -20,5 +28,7 @@ export namespace ImageCardStyles {
     min-height: 300px;
 
     border-radius: 8px;
+
+    animation: ${fadeIn} 0.6s;
   `
 }

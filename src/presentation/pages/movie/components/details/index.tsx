@@ -101,14 +101,18 @@ const DetailsSection: React.FC<Props> = ({
           <p>{details.overview}</p>
         </Styled.MainInfosContainer>
 
-        <Styled.MainInfosContainer>
-          <h3>genres</h3>
-          <Styled.GenresContainer>
-            {details.genres?.map(genre => (
-              <Styled.GenresCard key={genre.id}>{genre.name}</Styled.GenresCard>
-            ))}
-          </Styled.GenresContainer>
-        </Styled.MainInfosContainer>
+        {details.genres.length > 0 && (
+          <Styled.MainInfosContainer>
+            <h3>genres</h3>
+            <Styled.GenresContainer>
+              {details.genres?.map(genre => (
+                <Styled.GenresCard key={genre.id}>
+                  {genre.name}
+                </Styled.GenresCard>
+              ))}
+            </Styled.GenresContainer>
+          </Styled.MainInfosContainer>
+        )}
 
         <Styled.MainInfosContainer>
           <h3>infos</h3>

@@ -22,12 +22,34 @@ export namespace DetailsSectionStyles {
     }
   `
 
+  const grow = keyframes`
+    from {
+        width: 56px;
+        align-items: center;
+        border-radius: 50%;
+      } to {
+        width: 200px;
+        align-items: flex-start;
+        border-radius: 8px;
+      }
+  `
+
+  const fadeIn = keyframes`
+    from {
+      opacity: 0;
+    } to {
+      opacity: 1;
+    }
+  `
+
   export const Poster = styled('img')`
     max-height: 100%;
     max-width: 100%;
     margin: 10px;
     border-radius: 8px;
     box-shadow: ${({ theme }) => theme.shadows[4]};
+
+    animation: ${fadeIn} 0.6s;
 
     @media (max-width: 768px) {
       align-self: center;
@@ -87,26 +109,6 @@ export namespace DetailsSectionStyles {
     }
   `
 
-  const grow = keyframes`
-    from {
-        width: 56px;
-        align-items: center;
-        border-radius: 50%;
-      } to {
-        width: 200px;
-        align-items: flex-start;
-        border-radius: 8px;
-      }
-  `
-
-  const appear = keyframes`
-    from {
-      opacity: 0;
-    } to {
-      opacity: 1;
-    }
-  `
-
   type ButtonProps = { title?: string }
 
   export const Button = styled(MUIFab)<ButtonProps>`
@@ -132,7 +134,7 @@ export namespace DetailsSectionStyles {
 
       color: ${({ theme }) => theme.palette.common.white};
 
-      animation: ${appear} 0.4s forwards;
+      animation: ${fadeIn} 0.4s forwards;
     }
 
     @media (max-width: 992px) {

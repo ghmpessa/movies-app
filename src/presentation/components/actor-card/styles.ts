@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { keyframes, styled } from '@mui/material'
 
 export namespace ActorCard {
   export const Container = styled('div')`
@@ -28,6 +28,14 @@ export namespace ActorCard {
     src: string
   }
 
+  const fadeIn = keyframes`
+    from {
+      opacity: 0;
+    } to {
+      opacity: 1;
+    }
+  `
+
   export const Image = styled('div')<ImageProps>`
     flex: 1;
     border-top-right-radius: 8px;
@@ -36,6 +44,8 @@ export namespace ActorCard {
     background-size: cover;
     background-position: center;
     width: 100%;
+
+    animation: ${fadeIn} 0.6s;
   `
 
   export const InfosContainer = styled('div')`

@@ -188,8 +188,10 @@ const Movie: React.FC<Props> = ({
             onRating={handleRating}
             onRemoveRating={handleRemoveRating}
           />
-          <CastSection cast={cast} />
-          <BackdropSection images={images} title={details.title} />
+          {cast.length > 0 && <CastSection cast={cast} />}
+          {images.length > 0 && (
+            <BackdropSection images={images} title={details.title} />
+          )}
         </>
       )}
       <Feedback
