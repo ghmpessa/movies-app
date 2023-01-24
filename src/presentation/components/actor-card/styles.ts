@@ -2,9 +2,8 @@ import { styled } from '@mui/material'
 
 export namespace ActorCard {
   export const Container = styled('div')`
-    height: 300px;
-    width: 150px;
-
+    height: 350px;
+    width: 200px;
     flex: 1 0 auto;
 
     margin-right: 20px;
