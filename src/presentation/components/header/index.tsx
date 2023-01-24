@@ -89,11 +89,7 @@ const Header: React.FC<Props> = ({
       if (!session_id) return
       await deleteSession.delete({ session_id })
       setCurrentSession?.(null)
-      setCurrentAccount?.({
-        id: 0,
-        name: '',
-        username: '',
-      })
+      setCurrentAccount?.(null)
       setIsLogged(false)
       setFeedback({
         message: 'You logged out',

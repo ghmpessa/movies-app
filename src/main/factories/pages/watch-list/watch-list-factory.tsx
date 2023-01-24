@@ -3,7 +3,9 @@ import { makeRemoteLoadWatchList } from '@/main/factories/usecases'
 import { WatchList } from '@/presentation/pages'
 
 export const MakeWatchList: React.FC = () => {
-  const id = getCurrentAccount?.().id.toString()
+  const account = getCurrentAccount?.()
 
-  return <WatchList loadWatchList={makeRemoteLoadWatchList(id)} />
+  const account_id = !account ? '' : account.id.toString()
+
+  return <WatchList loadWatchList={makeRemoteLoadWatchList(account_id)} />
 }

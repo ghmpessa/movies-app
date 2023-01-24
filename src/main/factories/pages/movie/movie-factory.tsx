@@ -20,7 +20,7 @@ export const MakeMoviePage: React.FC = () => {
   const { movieId } = useParams()
   const account = getCurrentAccount?.()
 
-  const account_id = account.id === 0 ? '' : account.id.toString()
+  const account_id = !account ? '' : account.id.toString()
 
   return (
     <MoviePage
