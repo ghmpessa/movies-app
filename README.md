@@ -2,6 +2,8 @@
 
 Funny project created with Vite and React.JS consuming the [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction)
 
+[Click here to see the running application](https://moviewing-app.netlify.app)
+
 ## Run the development server
 
 ```bash
