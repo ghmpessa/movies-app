@@ -2,7 +2,7 @@ import { styled } from '@mui/material'
 
 export namespace MovieCardStyles {
   export const Container = styled('div')`
-    height: 400px;
+    height: 500px;
 
     display: flex;
     justify-content: center;
