@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
   makeRemoteCreateSession,
   makeRemoteDeleteSession,
@@ -6,14 +7,6 @@ import {
   makeRemoteRequestToken,
 } from '@/main/factories/usecases'
 
-import {
-  Footer,
-  Header,
-  MainContainer,
-  MoviesHeader,
-} from '@/presentation/components'
-
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import {
   MakeMovies,
   MakeWatchList,
@@ -25,9 +18,18 @@ import {
   MakeSearchPage,
 } from '@/main/factories/pages'
 
+import {
+  Footer,
+  Header,
+  MainContainer,
+  MoviesHeader,
+} from '@/presentation/components'
+
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+
 const Router: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename=''>
       <Header
         requestToken={makeRemoteRequestToken()}
         createSession={makeRemoteCreateSession()}
